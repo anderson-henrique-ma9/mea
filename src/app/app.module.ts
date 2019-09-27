@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -14,6 +12,13 @@ import { ROUTES } from './app.routes';
 import { HomeComponent } from './home/home.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
 import { RestauranteComponent } from './restaurantes/restaurante/restaurante.component';
+import { RestaurantesService } from './restaurantes/restaurantes.service';
+import { DestalhesRestauranteComponent } from './restaurantes/restaurante/destalhes-restaurante/destalhes-restaurante.component';
+import { MenuComponent } from './restaurantes/restaurante/destalhes-restaurante/menu/menu.component';
+import { CarrinhoComprasComponent } from './restaurantes/restaurante/destalhes-restaurante/carrinho-compras/carrinho-compras.component';
+import { ItemMenuComponent } from './restaurantes/restaurante/destalhes-restaurante/item-menu/item-menu.component';
+import { AvaliacoesComponent } from './restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component';
+import { registerLocaleData } from '@angular/common';
 
 
 @NgModule({
@@ -23,7 +28,12 @@ import { RestauranteComponent } from './restaurantes/restaurante/restaurante.com
     HeaderComponent,
     HomeComponent,
     RestaurantesComponent,
-    RestauranteComponent
+    RestauranteComponent,
+    DestalhesRestauranteComponent,
+    MenuComponent,
+    CarrinhoComprasComponent,
+    ItemMenuComponent,
+    AvaliacoesComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +42,9 @@ import { RestauranteComponent } from './restaurantes/restaurante/restaurante.com
     NgbModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [
+    RestaurantesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

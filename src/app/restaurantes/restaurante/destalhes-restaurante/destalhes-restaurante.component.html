@@ -1,0 +1,49 @@
+<div
+  class="card mb-3 mx-auto h-100 justify-content-center d-flex"
+  style="border: 1px solid red"
+  *ngIf="restaurante"
+>
+  <div class="card-header">
+    <h5 class="card-title mb-0 float-left">{{ restaurante?.name }}</h5>
+    <small class="float-right mb-0 mt-0"
+      >Nossa Avaliação: {{ restaurante?.rating }}</small
+    >
+  </div>
+  <div class="row no-gutters">
+    <div class="col-md-3">
+      <img [src]="restaurante?.imagePath" class="card-img w-75 d-flex" alt="..." />
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <h5 class="mb-0">Categoria</h5>
+        <p class="card-text mt-0">
+          {{ restaurante?.category }}
+        </p>
+        <h5 class="mb-0">Quem somos</h5>
+        <p class="card-text">
+          {{ restaurante?.about }}
+        </p>
+        <h5 class="mb-0">Nossos Horários</h5>
+        <p class="card-text">
+          {{ restaurante?.hours }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="btn-group btn-group-sm w-100"
+      role="group"
+      aria-label="Basic example"
+    >
+      <a class="btn btn-secondary" style="color: white" [routerLink]="['menu']"
+        >Menu</a
+      >
+      <a
+        class="btn btn-secondary"
+        style="color: white"
+        [routerLink]="['avaliacoes']"
+        >Avaliações</a
+      >
+    </div>
+  </div>
+</div>
+<router-outlet> </router-outlet>

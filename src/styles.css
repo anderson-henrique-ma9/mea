@@ -6,3 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .buttonJumbotron {
     margin: auto;
 }
+
+.backgroundGreenBanese {
+    background-color: #D61118;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    }

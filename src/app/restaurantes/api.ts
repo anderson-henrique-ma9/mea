@@ -1,0 +1,1 @@
+export const MEAT = 'http://localhost:3000'
