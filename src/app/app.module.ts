@@ -15,10 +15,12 @@ import { RestauranteComponent } from './restaurantes/restaurante/restaurante.com
 import { RestaurantesService } from './restaurantes/restaurantes.service';
 import { DestalhesRestauranteComponent } from './restaurantes/restaurante/destalhes-restaurante/destalhes-restaurante.component';
 import { MenuComponent } from './restaurantes/restaurante/destalhes-restaurante/menu/menu.component';
-import { CarrinhoComprasComponent } from './restaurantes/restaurante/destalhes-restaurante/carrinho-compras/carrinho-compras.component';
+import { CarrinhoComprasComponent } from './restaurantes/restaurante/destalhes-restaurante/menu/carrinho-compras/carrinho-compras.component';
 import { ItemMenuComponent } from './restaurantes/restaurante/destalhes-restaurante/item-menu/item-menu.component';
 import { AvaliacoesComponent } from './restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component';
-import { registerLocaleData } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CarrinhoComprasService } from './carrinho-compras.service';
+
 
 
 @NgModule({
@@ -40,9 +42,11 @@ import { registerLocaleData } from '@angular/common';
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FontAwesomeModule
   ],
   providers: [
+    CarrinhoComprasService,
     RestaurantesService
   ],
   bootstrap: [AppComponent]

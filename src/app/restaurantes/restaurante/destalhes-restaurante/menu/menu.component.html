@@ -1,15 +1,57 @@
-<div class="row">
-  <div class="col-sm-6 mb-2" *ngFor="let item of itensRestaurante">
-    <div class="card">
-      <div class="card-body">
-        <img [src]="item?.imagePath" class="card-img-top w-25 float-left" alt="..." />
-        <h5 class="card-title">{{item.name}}</h5>
-        <p class="card-text">
-          {{item.description}}
-        </p>
-        <small>{{item.price | currency }}</small>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+<div class="row mr-5">
+  <div class=" col-9">
+    <div class="col-12 mb-2" *ngFor="let item of itensRestaurante | async">
+      <div class="card">
+        <div class="card-body ">
+          <img
+            [src]="item?.imagePath"
+            class="card-img-top w-25 h-25 float-left"
+            alt="..."
+          />
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">
+            {{ item.description }}
+          </p>
+          <small>{{ item.price | currency: "BRL" }}</small>
+          <br />
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <a (click)="addItem(item)" class="badge badge-success text-white"
+            ><i class="fa fa-plus-square"></i> Adicionar</a
+          >
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <i class="fa fa-shopping-cart"></i>
+        Carrinho
+      </div>
+      <div
+        *ngIf="this.carrinhoCompraService.items.length == 0"
+        class="list-group-item"
+      >
+        Seu carrinho está vazio
+      </div>
+      <ul *ngIf="this.carrinhoCompraService.items.length > 0" class="list-group list-group-flush">
+        <li *ngFor="let item of this.carrinhoCompraService.items" class="list-group-item">
+          <h6 class="m-0 p-0">
+            {{ item["name"] + ":" }}
+            <p class="m-0 p-0 float-right">
+              {{ item["price"] | currency: "BRL" }}
+            </p>
+          </h6>
+        </li>
+        <div class="list-group-item mx-auto">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button (click)="clear()" type="button" class="btn btn-danger">
+              Limpar
+            </button>
+            <button type="button" class="btn btn-success">Finalizar</button>
+          </div>
+        </div>
+      </ul>
     </div>
   </div>
 </div>
