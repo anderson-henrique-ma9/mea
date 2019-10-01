@@ -36,12 +36,14 @@
       </div>
       <ul *ngIf="this.carrinhoCompraService.items.length > 0" class="list-group list-group-flush">
         <li *ngFor="let item of this.carrinhoCompraService.items" class="list-group-item">
+          <small>
           <h6 class="m-0 p-0">
             {{ item["name"] + ":" }}
             <p class="m-0 p-0 float-right">
               {{ item["price"] | currency: "BRL" }}
             </p>
           </h6>
+        </small>
         </li>
         <div class="list-group-item mx-auto">
           <div class="btn-group" role="group" aria-label="Basic example">
