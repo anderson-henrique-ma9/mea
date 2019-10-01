@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
     // console.log(this.items)
     if (this.items.length == 0) {
       this.carrinhoCompraService.addItem(item);
-      console.log(this.items);
+      // console.log(this.items);
     } else if (
       this.items[this.items.length - 1]["restaurantId"] !=
         this.route.parent.snapshot.params["id"] &&
@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit {
       // this.quantidade = this.quantidade + 1;
       // console.log(this.quantidade);
     }
-    console.log(this.valorTotal);
+    // console.log(this.valorTotal);
 
   }
 
