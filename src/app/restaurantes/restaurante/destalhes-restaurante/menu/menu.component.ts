@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { RestaurantesService } from "../../../restaurantes.service";
 import { ActivatedRoute } from "@angular/router";
 import { CarrinhoComprasService } from "../../../../carrinho-compras.service";
-import { CarItem } from './caritem.model';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 
 @Component({
   selector: "app-menu",
@@ -19,11 +19,11 @@ export class MenuComponent implements OnInit {
   items = this.carrinhoCompraService.items;
   // quantidade = 0;
 
-  valorTotal = this.carrinhoCompraService.total();
+  valorFinal = this.carrinhoCompraService.valorFinal;
+  routeParam = this.route.parent.snapshot.params["id"];
+  outroRestaurantes = false;
 
   itensRestaurante;
-
-
 
   ngOnInit() {
     /* this.restaurantesService
@@ -35,31 +35,43 @@ export class MenuComponent implements OnInit {
       this.route.parent.snapshot.params["id"]
     );
     // console.log(this.valorTotal)
+    // console.log(this.route.parent.snapshot.params["id"])
   }
 
   addItem(item) {
-    // item.quantidade = this.quantidade++;
-    // console.log(this.items)
     if (this.items.length == 0) {
       this.carrinhoCompraService.addItem(item);
-      // console.log(this.items);
     } else if (
-      this.items[this.items.length - 1]["restaurantId"] !=
-        this.route.parent.snapshot.params["id"] &&
-      this.items.length > 0
+      this.items[0].menuItem.restaurantId !=
+      this.route.parent.snapshot.params["id"]
     ) {
-      window.alert("restaurantes diferentes");
+      this.outroRestaurantes = true;
+      // window.alert("Restaurantes Diferentes");
     } else {
       this.carrinhoCompraService.addItem(item);
-      // this.quantidade = this.quantidade + 1;
-      // console.log(this.quantidade);
     }
-    // console.log(this.valorTotal);
+    this.total()
+  }
 
+  removeItem(item) {
+    this.carrinhoCompraService.removeItem(item);
   }
 
   clear() {
     this.carrinhoCompraService.clear();
+    this.outroRestaurantes = false;
   }
-  
+
+  total() {
+    if (
+      this.items[0].menuItem.restaurantId !=
+      this.route.parent.snapshot.params["id"]
+    ) {
+      this.outroRestaurantes = true;
+    } else this.carrinhoCompraService.total();
+
+    this.valorFinal = this.carrinhoCompraService.valorFinal;
+
+    // console.log(this.valorSoma)
+  }
 }

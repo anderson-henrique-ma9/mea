@@ -3,6 +3,6 @@ export interface MenuModel {
   imagePath: string;
   name: string;
   description: string;
-  prince: number;
+  price: number;
   restaurantId: string;
 }

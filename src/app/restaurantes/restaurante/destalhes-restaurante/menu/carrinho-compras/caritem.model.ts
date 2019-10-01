@@ -1,9 +1,7 @@
-export class CarItem {
+import { MenuModel } from "../../menu.model";
 
-    constructor (public quantity = 1) {
+export class CartItem {
+  constructor(public menuItem: MenuModel, public quantity = 1) {
 
-    }
-
-    
-
+  }
 }

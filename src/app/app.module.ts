@@ -20,6 +20,8 @@ import { ItemMenuComponent } from './restaurantes/restaurante/destalhes-restaura
 import { AvaliacoesComponent } from './restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CarrinhoComprasService } from './carrinho-compras.service';
+import { OrderComponent } from './order/order.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -35,7 +37,9 @@ import { CarrinhoComprasService } from './carrinho-compras.service';
     MenuComponent,
     CarrinhoComprasComponent,
     ItemMenuComponent,
-    AvaliacoesComponent
+    AvaliacoesComponent,
+    OrderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

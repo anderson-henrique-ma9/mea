@@ -34,23 +34,39 @@
       >
         Seu carrinho está vazio
       </div>
-      <ul *ngIf="this.carrinhoCompraService.items.length > 0" class="list-group list-group-flush">
-        <li *ngFor="let item of this.carrinhoCompraService.items" class="list-group-item">
+      <ul
+        *ngIf="this.carrinhoCompraService.items.length > 0"
+        class="list-group list-group-flush"
+      >
+        <li *ngFor="let item of this.items" class="list-group-item text-wrap">
           <small>
-          <h6 class="m-0 p-0">
-            {{ item["name"] + ":" }}
-            <p class="m-0 p-0 float-right">
-              {{ item["price"] | currency: "BRL" }}
-            </p>
-          </h6>
-        </small>
+            <h6 class="m-0 p-0">
+              {{ item.menuItem.name + ":" + " x" + item.quantity }}
+              <p class="m-0 p-0 float-right mt-1">
+                {{ item.menuItem.price * item.quantity | currency: "BRL" }}
+              </p>
+              <small class="float-center">
+                <a (click)="removeItem(item)" class="btn btn-outline-danger btn-sm"><i class="fa fa-times"></i></a>
+              </small>
+            </h6>
+          </small>
         </li>
+        <div class="text-center mt-2 font-weight-bold">
+          Total: {{ valorFinal | currency: 'BRL' }}
+        </div>
+        <div *ngIf="outroRestaurantes">
+          <h6 class="text-red text-center mt-2 text-danger">
+            Você tem itens de outro restaurante! Por favor, limpe o carrinho!
+          </h6>
+        </div>
         <div class="list-group-item mx-auto">
           <div class="btn-group" role="group" aria-label="Basic example">
             <button (click)="clear()" type="button" class="btn btn-danger">
               Limpar
             </button>
-            <button type="button" class="btn btn-success">Finalizar</button>
+            <button [routerLink]="['/order']"  type="button" (click)="total()" class="btn btn-success">
+              Finalizar
+            </button>
           </div>
         </div>
       </ul>
