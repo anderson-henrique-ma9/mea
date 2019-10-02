@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 ">
+      <h4 class=" font-weight-light mt-4">
+        Formas de Pagamento
+      </h4>
+      <div class="form-check" *ngFor="let forma of formasDePagamento">
+        <label class="form-check-label">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="optradio"
+            [value]="forma.codigo"
+            (click)="formaPagamento(forma.codigo)"
+          />{{ forma.nome }}
+        </label>
+      </div>
+    </div>
+    <div class="col-6">
+      <h4 class=" font-weight-light mt-4">
+        Frete e Total
+      </h4>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Itens</td>
+            <td *ngIf="items.length == 0" class="text-right">R$ 0,00</td>
+            <td *ngIf="items.length > 0" class="text-right">
+              {{ this.carrinhoComprasService.valorFinal | currency: "BRL" }}
+            </td>
+          </tr>
+          <tr>
+            <td>Frete</td>
+            <td class="text-right">R$ 10,00</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td *ngIf="items.length == 0" class="text-right">R$ 10,00</td>
+            <td *ngIf="items.length > 0" class="text-right">
+              {{
+                this.carrinhoComprasService.valorFinal + 10 | currency: "BRL"
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+        class="btn btn-success float-right"
+        type="submit"
+        (click)="onSubmit()"
+        [disabled]="!formData.valid"
+      >
+        <i class="fa fa-credit-card-alt"></i>{{ "   " }}Confirmar Pedido
+      </button>
+    </div>
+  </div>
+</div>

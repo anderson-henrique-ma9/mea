@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from "@angular/core";
 import { RestaurantesService } from "../../../restaurantes.service";
 import { ActivatedRoute } from "@angular/router";
 import { CarrinhoComprasService } from "../../../../carrinho-compras.service";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 
 @Component({
   selector: "app-menu",

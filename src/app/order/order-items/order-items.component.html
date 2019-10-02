@@ -1,0 +1,43 @@
+<div *ngIf="items.length == 0" class="container">
+  <p>
+    Você ainda não cadastrou nenhum produto! Que tal começar por aqui?
+    <a [routerLink]="['/restaurantes']" class="mx-auto ">
+      <button class="d-flex float-right btn btn-sm backgroundGreenBanese text-white">
+        Restaurantes
+      </button>
+    </a>
+  </p>
+</div>
+
+<div *ngIf="items.length > 0" class="container">
+  <table class="table mx-auto">
+    <thead>
+      <tr>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Item</th>
+        <th scope="col">Descrição</th>
+        <th scope="col" class="text-right">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of items">
+      <tr>
+        <th>
+          <button
+            (click)="diminuirQuantidade(item)"
+            class="fa fa-minus btn btn-small"
+          ></button
+          >{{ item.quantity
+          }}<button
+            (click)="aumentarQuantidade(item)"
+            class="fa fa-plus btn btn-small"
+          ></button>
+        </th>
+        <td>{{ item.menuItem.name }}</td>
+        <td>{{ item.menuItem.description }}</td>
+        <td class="text-right">
+          {{ item.menuItem.price * item.quantity | currency: "BRL" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
