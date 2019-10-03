@@ -1,15 +1,4 @@
-<div *ngIf="items.length == 0" class="container">
-  <p>
-    Você ainda não cadastrou nenhum produto! Que tal começar por aqui?
-    <a [routerLink]="['/restaurantes']" class="mx-auto ">
-      <button class="d-flex float-right btn btn-sm backgroundGreenBanese text-white">
-        Restaurantes
-      </button>
-    </a>
-  </p>
-</div>
-
-<div *ngIf="items.length > 0" class="container">
+<div class="container">
   <table class="table mx-auto">
     <thead>
       <tr>

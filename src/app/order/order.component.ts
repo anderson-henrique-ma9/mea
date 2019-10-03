@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { CarrinhoComprasService } from "../carrinho-compras.service";
 import { FormBuilder, Validators } from "@angular/forms";
+import { FinalizeOrderComponent } from './finalize-order/finalize-order.component';
 
 @Component({
   selector: "app-order",
@@ -15,18 +16,25 @@ export class OrderComponent implements OnInit {
 
   items = this.carrinhoComprasService.items;
 
-  formaPagamento
+  formaPagamento;
+
+  @ViewChild(FinalizeOrderComponent, {static: false})
+  private finalizeOrder: FinalizeOrderComponent;
 
 
   endereco = this.fb.group({
     rua: ["", [Validators.required, Validators.minLength(5)]],
     numero: ["", [Validators.required, Validators.pattern('^[0-9]*$')]],
     complemento: [""],
-    formaPagamento: [this.formaPagamento]
+    formaPagamento: []
   });
 
   receberFormaPagamento(codPagamento) {
-    this.formaPagamento = codPagamento
+    this.formaPagamento = codPagamento;
+    console.log(this.formaPagamento)
+    this.endereco.patchValue({
+      formaPagamento: this.formaPagamento
+    })
   }
 
   ngOnInit() {

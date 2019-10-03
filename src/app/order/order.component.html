@@ -1,10 +1,24 @@
-{{ endereco.status }} <br />
-{{ endereco.value | json }}
+<div *ngIf="items.length == 0" class="container mt-5">
+  <p>
+    Você ainda não adicionou nenhum produto ao seu carrinho! Que tal começar?
+    <a [routerLink]="['/restaurantes']" class="mx-auto ">
+      <button
+        class="d-flex float-right btn btn-sm backgroundGreenBanese text-white"
+      >
+        Restaurantes
+      </button>
+    </a>
+  </p>
+</div>
 
-<div>
+<div *ngIf="items.length > 0">
+  {{ endereco.status }} <br />
+  {{ endereco.value | json }}
   <div class="row ml-2 mt-2">
-    <i class="fa fa-shopping-cart"></i>
-    {{ "   " }}Finalize sua compra
+    <h3 class="ml-2 font-weight-light">
+      <i class="fa fa-shopping-cart"></i>
+      {{ "   " }}Finalize sua compra
+    </h3>
   </div>
   <div class="dropdown-divider"></div>
   <h4 class="ml-2 font-weight-light">
@@ -50,6 +64,7 @@
   <!-- início da sessão de forma de pagamento + frete-->
 
   <app-finalize-order
+    *ngIf="this.items.length > 0"
     [formData]="endereco"
     (enviarCodPag)="receberFormaPagamento($event)"
   ></app-finalize-order>

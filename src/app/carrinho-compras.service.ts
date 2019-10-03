@@ -16,7 +16,14 @@ export class CarrinhoComprasService implements OnInit {
   arraySoma = [];
   valorFinal;
 
+  codigoPagamento;
+
   constructor(private route: ActivatedRoute) {}
+
+  onCodigoPagamento(codPagamento) {
+    this.codigoPagamento = codPagamento;
+    console.log(this.codigoPagamento)
+  }
 
   addItem(item: MenuModel) {
     let foundItem = this.items.find(mItem => mItem.menuItem.id === item.id);

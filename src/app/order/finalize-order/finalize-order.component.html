@@ -11,7 +11,8 @@
             class="form-check-input"
             name="optradio"
             [value]="forma.codigo"
-            (click)="formaPagamento(forma.codigo)"
+            #codigoPagamento
+            (click)="enviarFormaPagamento(forma.codigo)"
           />{{ forma.nome }}
         </label>
       </div>
@@ -49,7 +50,7 @@
         class="btn btn-success float-right"
         type="submit"
         (click)="onSubmit()"
-        [disabled]="!formData.valid"
+        [disabled]="!formData.valid || this.formData.value.formaPagamento == null"
       >
         <i class="fa fa-credit-card-alt"></i>{{ "   " }}Confirmar Pedido
       </button>

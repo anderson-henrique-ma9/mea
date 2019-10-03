@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { CarrinhoComprasService } from "../../carrinho-compras.service";
-import { RestaurantesService } from "src/app/restaurantes/restaurantes.service";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CarrinhoComprasService } from '../../carrinho-compras.service';
+import { RestaurantesService } from 'src/app/restaurantes/restaurantes.service';
 
 @Component({
-  selector: "app-finalize-order",
-  templateUrl: "./finalize-order.component.html",
-  styleUrls: ["./finalize-order.component.css"]
+  selector: 'app-finalize-order',
+  templateUrl: './finalize-order.component.html',
+  styleUrls: ['./finalize-order.component.css']
 })
 export class FinalizeOrderComponent implements OnInit {
   constructor(
@@ -31,24 +31,27 @@ export class FinalizeOrderComponent implements OnInit {
       nome: 'Vale Refeição',
       codigo: 'REF'
     }
-  ]
-
+  ];
+  codPagamento;
 
   @Input() formData;
 
-  @Output() enviarCodPag = new EventEmitter<string>();
+  @Output() teste = new EventEmitter();
 
-  codPagamento
+  @Output() enviarCodPag = new EventEmitter();
 
-  formaPagamento(codPagamento) {
-    console.log(codPagamento)
-    this.codPagamento = codPagamento
-    console.log(this.enviarCodPag.emit())
+  // codigoPagamento
+
+  enviarFormaPagamento(codPagamento) {
+    // console.log(codPagamento);
+    this.codPagamento = codPagamento;
+    this.enviarCodPag.emit(codPagamento);
   }
 
-
   ngOnInit() {
-    console.log(this.formasDePagamento)
+    console.log(this.formData.value.formaPagamento);
+    // console.log(this.formasDePagamento);
+    // console.log(this.teste.emit(true));
 
     // implmenentação p/ frete dinâmico
     /* let saberRestauranteAtual = this.items.find(
@@ -67,6 +70,6 @@ export class FinalizeOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formData.value)
+    console.log(this.formData.value);
   }
 }
