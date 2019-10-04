@@ -25,6 +25,7 @@ import { OrderComponent } from "./order/order.component";
 import { FooterComponent } from "./footer/footer.component";
 import { OrderItemsComponent } from "./order/order-items/order-items.component";
 import { FinalizeOrderComponent } from "./order/finalize-order/finalize-order.component";
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FinalizeOrderComponent } from "./order/finalize-order/finalize-order.co
     OrderComponent,
     FooterComponent,
     OrderItemsComponent,
-    FinalizeOrderComponent
+    FinalizeOrderComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,

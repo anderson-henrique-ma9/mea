@@ -6,6 +6,8 @@ import { DestalhesRestauranteComponent } from "./restaurantes/restaurante/destal
 import { MenuComponent } from "./restaurantes/restaurante/destalhes-restaurante/menu/menu.component";
 import { AvaliacoesComponent } from "./restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component";
 import { OrderComponent } from "./order/order.component";
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+
 
 export const ROUTES = [
   { path: "", component: HomeComponent },
@@ -20,5 +22,6 @@ export const ROUTES = [
       { path: "avaliacoes", component: AvaliacoesComponent }
     ]
   },
-  { path: "order", component: OrderComponent }
+  { path: "order", component: OrderComponent },
+  { path: 'order-summary', component: OrderSummaryComponent }
 ];

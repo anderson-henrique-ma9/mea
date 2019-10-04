@@ -49,7 +49,7 @@
       <button
         class="btn btn-success float-right"
         type="submit"
-        (click)="onSubmit()"
+        (click)="onSubmit(formData.value)"
         [disabled]="!formData.valid || this.formData.value.formaPagamento == null"
       >
         <i class="fa fa-credit-card-alt"></i>{{ "   " }}Confirmar Pedido

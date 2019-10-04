@@ -4,11 +4,23 @@ import { ActivatedRoute } from "@angular/router";
 import { MenuModel } from "./restaurantes/restaurante/destalhes-restaurante/menu.model";
 import { CartItem } from "./restaurantes/restaurante/destalhes-restaurante/menu/carrinho-compras/caritem.model";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { MEAT } from "./restaurantes/api";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class CarrinhoComprasService implements OnInit {
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+
+  MEAT = MEAT;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json"
+    })
+  };
+
   items = [];
 
   umItem;
@@ -18,11 +30,9 @@ export class CarrinhoComprasService implements OnInit {
 
   codigoPagamento;
 
-  constructor(private route: ActivatedRoute) {}
-
   onCodigoPagamento(codPagamento) {
     this.codigoPagamento = codPagamento;
-    console.log(this.codigoPagamento)
+    console.log(this.codigoPagamento);
   }
 
   addItem(item: MenuModel) {
@@ -93,6 +103,12 @@ export class CarrinhoComprasService implements OnInit {
       this.valorFinal = this.arraySoma.reduce((prev, value) => prev + value);
     }
     return (this.valorFinal = this.valorFinal);
+  }
+
+  enviarPedido(infoPedido) {
+    return this.http
+      .post(`${this.MEAT}/orders`, infoPedido, this.httpOptions)
+      .pipe();
   }
 
   ngOnInit(): void {}

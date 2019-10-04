@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CarrinhoComprasService } from '../../carrinho-compras.service';
-import { RestaurantesService } from 'src/app/restaurantes/restaurantes.service';
-
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { CarrinhoComprasService } from "../../carrinho-compras.service";
+import { RestaurantesService } from "src/app/restaurantes/restaurantes.service";
+import { Order, OrderItem } from "../order.model";
 @Component({
-  selector: 'app-finalize-order',
-  templateUrl: './finalize-order.component.html',
-  styleUrls: ['./finalize-order.component.css']
+  selector: "app-finalize-order",
+  templateUrl: "./finalize-order.component.html",
+  styleUrls: ["./finalize-order.component.css"]
 })
 export class FinalizeOrderComponent implements OnInit {
   constructor(
@@ -20,25 +20,28 @@ export class FinalizeOrderComponent implements OnInit {
 
   formasDePagamento = [
     {
-      nome: 'Dinheiro',
-      codigo: 'MON'
+      nome: "Dinheiro",
+      codigo: "MON"
     },
     {
-      nome: 'Cartão de Débito',
-      codigo: 'DEB'
+      nome: "Cartão de Débito",
+      codigo: "DEB"
     },
     {
-      nome: 'Vale Refeição',
-      codigo: 'REF'
+      nome: "Vale Refeição",
+      codigo: "REF"
     }
   ];
   codPagamento;
+
+  orderItem: OrderItem[] = [];
 
   @Input() formData;
 
   @Output() teste = new EventEmitter();
 
   @Output() enviarCodPag = new EventEmitter();
+  @Output() emitirItensPedido = new EventEmitter();
 
   // codigoPagamento
 
@@ -49,10 +52,9 @@ export class FinalizeOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.formData.value.formaPagamento);
+    // console.log(this.formData.value.formaPagamento);
     // console.log(this.formasDePagamento);
     // console.log(this.teste.emit(true));
-
     // implmenentação p/ frete dinâmico
     /* let saberRestauranteAtual = this.items.find(
       itemAtual =>
@@ -69,7 +71,14 @@ export class FinalizeOrderComponent implements OnInit {
     console.log(this.restaurante); */
   }
 
-  onSubmit() {
-    console.log(this.formData.value);
+  onSubmit(orderForm: Order) {
+    // console.log(orderForm);
+    this.orderItem.length = 0;
+    for (let item of this.items) {
+      this.orderItem.push(new OrderItem(item.quantity, item.menuItem.id));
+    }
+    // console.log(this.orderItem);
+
+    this.emitirItensPedido.emit(this.orderItem);
   }
 }

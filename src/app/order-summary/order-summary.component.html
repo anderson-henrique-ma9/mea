@@ -1,0 +1,24 @@
+<div class="jumbotron my-3">
+  <h1 class="display-4 text-center">Pedido Concluído</h1>
+  <p class="lead text-center ">
+    O restaurante já recebeu seu pedido! Em breve, ele estará aí em sua casa!
+  </p>
+  <hr class="my-4" />
+  <p class="text-center lead">
+    O que acha de avaliar seu pedido?
+  </p>
+  <h5 class="text-center">
+    <i
+      *ngFor="let r of rates"
+      class="fa fa-star"
+      [ngClass]="{ 'fa-star-o': r > this.rate }"
+      (click)="setRate(r)"
+      (mouseenter)="setTemporaryRate(r)"
+      (mouseleave)="clearTemporaryRate()"
+    ></i>
+  </h5>
+  <br />
+  <p class="text-center" [hidden]="!rated">
+    Obrigado pela sua avaliação!
+  </p>
+</div>
