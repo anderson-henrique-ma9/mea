@@ -6,12 +6,17 @@ import { CartItem } from "./restaurantes/restaurante/destalhes-restaurante/menu/
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { MEAT } from "./restaurantes/api";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { SnackService } from "./shared/snackbar/snack.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class CarrinhoComprasService implements OnInit {
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private snackService: SnackService
+  ) {}
 
   MEAT = MEAT;
 
@@ -43,10 +48,12 @@ export class CarrinhoComprasService implements OnInit {
     } else {
       this.items.push(new CartItem(item));
     }
+    this.snackService.notify(`Você adicionou o item ${item.name}`);
   }
 
   removeItem(item) {
     this.items.splice(this.items.indexOf(item), 1);
+    this.snackService.notify(`Você removeu o item ${item.menuItem.name}`);
   }
 
   total() {

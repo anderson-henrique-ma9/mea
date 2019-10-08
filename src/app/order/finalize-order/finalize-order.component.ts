@@ -9,7 +9,7 @@ import { Order, OrderItem } from "../order.model";
 })
 export class FinalizeOrderComponent implements OnInit {
   constructor(
-    private carrinhoComprasService: CarrinhoComprasService,
+    public carrinhoComprasService: CarrinhoComprasService,
     private restaurantesService: RestaurantesService
   ) {}
 

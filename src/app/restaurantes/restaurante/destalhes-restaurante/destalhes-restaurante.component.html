@@ -1,4 +1,4 @@
-<div class="card mb-3 h-100 justify-content-center d-flex" *ngIf="restaurante">
+<div [@restaurantDetailsAppeard] = "restaurantDetailsStatus" class="card mb-3 h-100 justify-content-center d-flex" *ngIf="restaurante">
   <div class="card-header">
     <h5 class="card-title mb-0 float-left">{{ restaurante?.name }}</h5>
     <small class="float-right mb-0 mt-0"

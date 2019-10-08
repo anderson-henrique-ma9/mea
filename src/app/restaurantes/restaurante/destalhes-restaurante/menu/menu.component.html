@@ -1,7 +1,7 @@
 <div class="row mr-5">
   <div class=" col-9">
     <div class="col-12 mb-2" *ngFor="let item of itensRestaurante | async">
-      <div class="card">
+      <div [@itemsAppeard]="itemsState" class="card">
         <div class="card-body ">
           <img
             [src]="item?.imagePath"
@@ -24,11 +24,11 @@
   </div>
   <div class="col-3">
     <div class="card" style="width: 18rem;">
-      <div class="card-header">
+      <div class="card-header "[@emptyCartItem] = "emptyCartState">
         <i class="fa fa-shopping-cart"></i>
         Carrinho
       </div>
-      <div
+      <div [@emptyCartItem] = "emptyCartState"
         *ngIf="this.carrinhoCompraService.items.length == 0"
         class="list-group-item"
       >
@@ -38,7 +38,11 @@
         *ngIf="this.carrinhoCompraService.items.length > 0"
         class="list-group list-group-flush"
       >
-        <li *ngFor="let item of this.items" class="list-group-item text-wrap">
+        <li
+          [@cartItemAppeard]="cartItemState"
+          *ngFor="let item of this.items"
+          class="list-group-item text-wrap"
+        >
           <small>
             <h6 class="m-0 p-0">
               {{ item.menuItem.name + ":" + " x" + item.quantity }}
@@ -46,13 +50,17 @@
                 {{ item.menuItem.price * item.quantity | currency: "BRL" }}
               </p>
               <small class="float-center">
-                <a (click)="removeItem(item)" class="btn btn-outline-danger btn-sm"><i class="fa fa-times"></i></a>
+                <a
+                  (click)="removeItem(item)"
+                  class="btn btn-outline-danger btn-sm"
+                  ><i class="fa fa-times"></i
+                ></a>
               </small>
             </h6>
           </small>
         </li>
         <div class="text-center mt-2 font-weight-bold">
-          Total: {{ valorFinal | currency: 'BRL' }}
+          Total: {{ valorFinal | currency: "BRL" }}
         </div>
         <div *ngIf="outroRestaurantes">
           <h6 class="text-red text-center mt-2 text-danger">
@@ -64,7 +72,12 @@
             <button (click)="clear()" type="button" class="btn btn-danger">
               Limpar
             </button>
-            <button [routerLink]="['/order']"  type="button" (click)="total()" class="btn btn-success">
+            <button
+              [routerLink]="['/order']"
+              type="button"
+              (click)="total()"
+              class="btn btn-success"
+            >
               Finalizar
             </button>
           </div>

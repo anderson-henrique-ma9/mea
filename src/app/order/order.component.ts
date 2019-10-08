@@ -4,13 +4,28 @@ import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { FinalizeOrderComponent } from "./finalize-order/finalize-order.component";
 import { OrderItem } from "./order.model";
 import { Router } from "@angular/router";
+import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: "app-order",
   templateUrl: "./order.component.html",
-  styleUrls: ["./order.component.css"]
+  styleUrls: ["./order.component.css"], 
+  animations: [
+    trigger('orderComponentState', [
+      state('ready', style({
+        opacity: 1
+      })),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('300ms 0s ease-in')
+      ])
+    ])
+  ]
 })
 export class OrderComponent implements OnInit {
+
+  orderComponentState = 'ready'
+
   constructor(
     private carrinhoComprasService: CarrinhoComprasService,
     private fb: FormBuilder,
@@ -76,7 +91,7 @@ export class OrderComponent implements OnInit {
       .subscribe(res => {
         if (res) {
           console.log(res);
-          this.router.navigate(["/order-summary"])
+          this.router.navigate(["/order-summary"]);
           this.carrinhoComprasService.clear();
         }
       });

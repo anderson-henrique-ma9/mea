@@ -1,17 +1,19 @@
-import { SobreComponent } from "./sobre/sobre.component";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { RestaurantesComponent } from "./restaurantes/restaurantes.component";
 import { DestalhesRestauranteComponent } from "./restaurantes/restaurante/destalhes-restaurante/destalhes-restaurante.component";
 import { MenuComponent } from "./restaurantes/restaurante/destalhes-restaurante/menu/menu.component";
 import { AvaliacoesComponent } from "./restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component";
-import { OrderComponent } from "./order/order.component";
-import { OrderSummaryComponent } from './order-summary/order-summary.component';
-
+import { OrderSummaryComponent } from "./order-summary/order-summary.component";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const ROUTES = [
   { path: "", component: HomeComponent },
-  { path: "sobre", component: SobreComponent },
+  {
+    path: "sobre",
+    loadChildren: () =>
+      import("./sobre/sobre.module").then(module => module.SobreModule)
+  },
   { path: "restaurantes", component: RestaurantesComponent },
   {
     path: "restaurantes/:id",
@@ -22,6 +24,11 @@ export const ROUTES = [
       { path: "avaliacoes", component: AvaliacoesComponent }
     ]
   },
-  { path: "order", component: OrderComponent },
-  { path: 'order-summary', component: OrderSummaryComponent }
+  {
+    path: "order",
+    loadChildren: () =>
+      import("./order/order.module").then(mod => mod.OrderModule)
+  },
+  { path: "order-summary", component: OrderSummaryComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];

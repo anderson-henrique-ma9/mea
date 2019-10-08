@@ -1,1 +1,4 @@
-export const MEAT = 'http://localhost:3000'
+import { environment } from '../../environments/environment';
+
+
+export const MEAT = environment.api
