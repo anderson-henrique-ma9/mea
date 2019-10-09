@@ -4,27 +4,32 @@ import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { FinalizeOrderComponent } from "./finalize-order/finalize-order.component";
 import { OrderItem } from "./order.model";
 import { Router } from "@angular/router";
-import { trigger, state, style, animate, transition } from '@angular/animations'
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from "@angular/animations";
 
 @Component({
   selector: "app-order",
   templateUrl: "./order.component.html",
-  styleUrls: ["./order.component.css"], 
+  styleUrls: ["./order.component.css"],
   animations: [
-    trigger('orderComponentState', [
-      state('ready', style({
-        opacity: 1
-      })),
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('300ms 0s ease-in')
-      ])
+    trigger("orderComponentState", [
+      state(
+        "ready",
+        style({
+          opacity: 1
+        })
+      ),
+      transition(":enter", [style({ opacity: 0 }), animate("300ms 0s ease-in")])
     ])
   ]
 })
 export class OrderComponent implements OnInit {
-
-  orderComponentState = 'ready'
+  orderComponentState = "ready";
 
   constructor(
     private carrinhoComprasService: CarrinhoComprasService,
@@ -42,17 +47,23 @@ export class OrderComponent implements OnInit {
 
   infoPedido = this.fb.group(
     {
-      rua: ["", [Validators.required, Validators.minLength(5)]],
-      numero: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
-      complemento: [""],
-      formaPagamento: [],
-      pedido: [""],
-      nome: ["", [Validators.required, Validators.minLength(5)]],
-      email: ["", [Validators.required, Validators.pattern(this.emailPattern)]],
-      confirmaEmail: [
-        "",
-        [Validators.required, Validators.pattern(this.emailPattern)]
-      ]
+      rua: this.fb.control("", [Validators.required, Validators.minLength(5)]),
+      numero: this.fb.control("", [
+        Validators.required,
+        Validators.pattern("^[0-9]*$")
+      ]),
+      complemento: this.fb.control(""),
+      formaPagamento: this.fb.control("", [Validators.required]),
+      pedido: this.fb.control(""),
+      nome: this.fb.control("", [Validators.required, Validators.minLength(5)]),
+      email: this.fb.control("", [
+        Validators.required,
+        Validators.pattern(this.emailPattern)
+      ]),
+      confirmaEmail: this.fb.control("", [
+        Validators.required,
+        Validators.pattern(this.emailPattern)
+      ])
     },
     { validator: OrderComponent.equalsTo }
   );
@@ -66,7 +77,9 @@ export class OrderComponent implements OnInit {
     if (email.value !== emailConfirmation.value) {
       return { emailsNotMatch: true };
     }
-    return undefined;
+    if (email.value === emailConfirmation.value) {
+      return undefined
+    }
   }
 
   get info() {

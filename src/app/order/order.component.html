@@ -1,4 +1,8 @@
-<div *ngIf="items.length == 0" class="container mt-5" [@orderComponentState] = "orderComponentState">
+<div
+  *ngIf="items.length == 0"
+  class="container mt-5"
+  [@orderComponentState]="orderComponentState"
+>
   <div class="jumbotron">
     <h1 class="display-4 text-center">
       <i class="fa fa-shopping-cart"></i>
@@ -24,9 +28,9 @@
   </div>
 </div>
 
-<div *ngIf="items.length > 0" [@orderComponentState] = "orderComponentState">
+<div *ngIf="items.length > 0" [@orderComponentState]="orderComponentState">
   <!-- {{ infoPedido.status }} <br />
-  {{ infoPedido.value | json }} -->
+  {{ infoPedido.hasError("emailsNotMatch") }} -->
   <div class="row ml-2 mt-2">
     <h3 class="ml-2 font-weight-light">
       <i class="fa fa-shopping-cart"></i>
@@ -164,6 +168,7 @@
           formControlName="email"
         />
       </div>
+
       <div class="col-4">
         <input
           type="text"
@@ -181,6 +186,12 @@
           placeholder="Confirma seu e-mail"
           formControlName="confirmaEmail"
         />
+        <small
+          *ngIf="infoPedido.hasError('emailsNotMatch')"
+          class="text-danger container"
+        >
+          Os e-mails precisam ser iguais
+        </small>
       </div>
     </form>
   </form>

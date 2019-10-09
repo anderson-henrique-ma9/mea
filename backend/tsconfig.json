@@ -1,0 +1,11 @@
+/*
+    instalar compilador typescript:
+        npm install typescript -g
+*/
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noEmitOnError": false,
+    "outDir": "./dist"
+  }
+}

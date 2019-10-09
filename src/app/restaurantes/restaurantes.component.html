@@ -1,1 +1,23 @@
+<div class="container clearfix">
+  <form [formGroup]="searchForm" class="row ">
+    <h4 class="text-center ">
+      Todos os Restaurantes
+    </h4>
+    <input
+      formControlName="searchControl"
+      class="col-md-4 form-control ml-auto mr-md-1 float-md-right"
+      type="search"
+      placeholder="Pesquisar"
+      aria-label="Pesquisar"
+    />
+    <a
+      class="btn backgroundGreenBanese text-white text-center col-md-1 float-md-right mx-0"
+    >
+      <i class="fa fa-search"></i>
+    </a>
+  </form>
+  <div *ngIf="restaurantes?.length === 0" >
+    Não encontramos resultado para sua busca
+  </div>
+</div>
 <app-restaurante [restaurantes]="restaurantes"></app-restaurante>
