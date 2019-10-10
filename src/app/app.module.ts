@@ -4,8 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -29,7 +28,9 @@ import { FooterComponent } from "./footer/footer.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { CoreModule } from "./core/core.module";
 import { SnackbarComponent } from "./shared/snackbar/snackbar.component";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { LoginComponent } from "./security/login/login.component";
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FooterComponent,
     OrderSummaryComponent,
     SnackbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +61,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       preloadingStrategy: PreloadAllModules
     }),
     FontAwesomeModule,
-    CoreModule,
-    
+    CoreModule
   ],
-  providers: [/* {provide: LocationStrategy, useClass: HashLocationStrategy} */],
+  providers: [
+    /* {provide: LocationStrategy, useClass: HashLocationStrategy} */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

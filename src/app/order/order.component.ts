@@ -4,6 +4,7 @@ import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { FinalizeOrderComponent } from "./finalize-order/finalize-order.component";
 import { OrderItem } from "./order.model";
 import { Router } from "@angular/router";
+import { tap } from "rxjs/operators";
 import {
   trigger,
   state,
@@ -43,6 +44,9 @@ export class OrderComponent implements OnInit {
 
   itensPedido: OrderItem[] = [];
 
+  orderId: string;
+  lastOrder;
+
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   infoPedido = this.fb.group(
@@ -78,7 +82,7 @@ export class OrderComponent implements OnInit {
       return { emailsNotMatch: true };
     }
     if (email.value === emailConfirmation.value) {
-      return undefined
+      return undefined;
     }
   }
 
@@ -93,12 +97,18 @@ export class OrderComponent implements OnInit {
       formaPagamento: this.formaPagamento
     });
   }
+
+  isOrderCompleted(): boolean {
+    return this.lastOrder !== undefined;
+  }
+
   receberItensPedido(orderItem) {
     this.itensPedido = orderItem;
     // console.log(this.itensPedido);
     this.infoPedido.patchValue({
       pedido: this.itensPedido
     });
+    this.lastOrder = this.carrinhoComprasService.lastOrder;
     this.carrinhoComprasService
       .enviarPedido(this.infoPedido.value)
       .subscribe(res => {
@@ -108,6 +118,7 @@ export class OrderComponent implements OnInit {
           this.carrinhoComprasService.clear();
         }
       });
+    this.lastOrder = this.carrinhoComprasService.lastOrder;
   }
 
   ngOnInit() {

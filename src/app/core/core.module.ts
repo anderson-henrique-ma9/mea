@@ -1,17 +1,23 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RestaurantesService } from '../restaurantes/restaurantes.service';
-import { CarrinhoComprasService } from '../carrinho-compras.service';
-import { SnackService } from '../shared/snackbar/snack.service';
-
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RestaurantesService } from "../restaurantes/restaurantes.service";
+import { CarrinhoComprasService } from "../carrinho-compras.service";
+import { SnackService } from "../shared/snackbar/snack.service";
+import { LoginService } from "../security/login/login.service";
+import { LoggedInGuard } from "../security/loggedin.guard";
+import { LeaveOrderGuard } from "../order/leave-order.guard";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "../security/auth.interceptor";
 
 @NgModule({
   providers: [
     RestaurantesService,
     CarrinhoComprasService,
-    SnackService
+    SnackService,
+    LoginService,
+    LoggedInGuard,
+    LeaveOrderGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -7,6 +7,8 @@ import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { MEAT } from "./restaurantes/api";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SnackService } from "./shared/snackbar/snack.service";
+import { LoginService } from "./security/login/login.service";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -15,7 +17,8 @@ export class CarrinhoComprasService implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private snackService: SnackService
+    private snackService: SnackService,
+    private loginService: LoginService
   ) {}
 
   MEAT = MEAT;
@@ -32,6 +35,8 @@ export class CarrinhoComprasService implements OnInit {
   itemSoma;
   arraySoma = [];
   valorFinal;
+
+  lastOrder;
 
   codigoPagamento;
 
@@ -113,9 +118,20 @@ export class CarrinhoComprasService implements OnInit {
   }
 
   enviarPedido(infoPedido) {
+    let headers = new HttpHeaders();
+
+    if (this.loginService.isLoggedIn()) {
+      headers = headers.set(
+        "Authorization",
+        `Bearer ${this.loginService.user.accessToken}`
+      );
+    }
+
     return this.http
-      .post(`${this.MEAT}/orders`, infoPedido, this.httpOptions)
-      .pipe();
+      .post(`${this.MEAT}/orders`, infoPedido, {
+        headers: headers
+      })
+      .pipe(tap(order => (this.lastOrder = order)));
   }
 
   ngOnInit(): void {}

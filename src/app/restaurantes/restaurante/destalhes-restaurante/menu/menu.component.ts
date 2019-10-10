@@ -52,19 +52,18 @@ import {
         )
       ])
     ]),
-    trigger('emptyCartItem', [
-      state('ready', style({opacity: 1, transform: 'translateX(0px)'})),
-      transition(':enter', [
-        style({opacity: 0, transform: 'translateX(-30px)'}),
-        animate('300ms 0s ease-in')
+    trigger("emptyCartItem", [
+      state("ready", style({ opacity: 1, transform: "translateX(0px)" })),
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateX(-30px)" }),
+        animate("300ms 0s ease-in")
       ])
     ])
   ]
 })
 export class MenuComponent implements OnInit {
-
-  emptyCartState = 'ready'
-  cartItemState
+  emptyCartState = "ready";
+  cartItemState;
   itemsState = "ready";
   constructor(
     private restaurantesService: RestaurantesService,
@@ -108,7 +107,7 @@ export class MenuComponent implements OnInit {
     }
     this.total();
 
-    console.log(this.cartItemState);
+    // console.log(this.cartItemState);
   }
 
   removeItem(item) {

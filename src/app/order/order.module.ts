@@ -4,12 +4,20 @@ import { OrderComponent } from "./order.component";
 import { OrderItemsComponent } from "./order-items/order-items.component";
 import { FinalizeOrderComponent } from "./finalize-order/finalize-order.component";
 import { Routes, RouterModule } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LeaveOrderGuard } from "./leave-order.guard";
 
-const ROUTES: Routes = [{ path: "", component: OrderComponent}];
+const ROUTES: Routes = [
+  { path: "", component: OrderComponent, canDeactivate: [LeaveOrderGuard] }
+];
 
 @NgModule({
   declarations: [OrderComponent, OrderItemsComponent, FinalizeOrderComponent],
-  imports: [CommonModule, RouterModule.forChild(ROUTES), FormsModule, ReactiveFormsModule]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(ROUTES),
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class OrderModule {}

@@ -1,5 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar navbar-dark backgroundGreenBanese sticky-top">
-  <a class="navbar-brand" [routerLink]="['']" >Meat</a>
+<nav
+  class="navbar navbar-expand-lg navbar navbar-dark backgroundGreenBanese sticky-top"
+>
+  <a class="navbar-brand" [routerLink]="['']">Meat</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -15,11 +17,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/restaurantes']" routerLinkActive="active" >Restaurantes</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/restaurantes']"
+          routerLinkActive="active"
+          >Restaurantes</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/sobre']" routerLinkActive="active" >Sobre</a>
+        <a class="nav-link" [routerLink]="['/sobre']" routerLinkActive="active"
+          >Sobre</a
+        >
       </li>
     </ul>
+    <div class="ml-auto">
+      <app-user-detail></app-user-detail>
+    </div>
   </div>
 </nav>

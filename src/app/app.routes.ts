@@ -5,16 +5,19 @@ import { DestalhesRestauranteComponent } from "./restaurantes/restaurante/destal
 import { MenuComponent } from "./restaurantes/restaurante/destalhes-restaurante/menu/menu.component";
 import { AvaliacoesComponent } from "./restaurantes/restaurante/destalhes-restaurante/avaliacoes/avaliacoes.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { LoginComponent } from "./security/login/login.component";
+import { LoggedInGuard } from "./security/loggedin.guard";
 
 export const ROUTES = [
   { path: "", component: HomeComponent },
+  { path: "login/:to", component: LoginComponent },
+  { path: "login", component: LoginComponent },
   {
     path: "sobre",
     loadChildren: () =>
       import("./sobre/sobre.module").then(module => module.SobreModule)
   },
-  { path: "restaurantes", component: RestaurantesComponent },
   {
     path: "restaurantes/:id",
     component: DestalhesRestauranteComponent,
@@ -24,11 +27,14 @@ export const ROUTES = [
       { path: "avaliacoes", component: AvaliacoesComponent }
     ]
   },
+  { path: "restaurantes", component: RestaurantesComponent },
   {
     path: "order",
     loadChildren: () =>
-      import("./order/order.module").then(mod => mod.OrderModule)
+      import("./order/order.module").then(mod => mod.OrderModule),
+    canLoad: [LoggedInGuard],
+    canActivate: [LoggedInGuard]
   },
   { path: "order-summary", component: OrderSummaryComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: "**", component: PageNotFoundComponent }
 ];
