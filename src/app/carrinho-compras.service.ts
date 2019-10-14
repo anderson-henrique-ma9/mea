@@ -28,6 +28,8 @@ export class CarrinhoComprasService implements OnInit {
   };
 
   items = [];
+  localItems;
+  finalItems;
 
   umItem;
   itemSoma;
@@ -46,17 +48,28 @@ export class CarrinhoComprasService implements OnInit {
   addItem(item: MenuModel) {
     let foundItem = this.items.find(mItem => mItem.menuItem.id === item.id);
 
+    if (localStorage.getItem("cartItem")) {
+      this.finalItems = this.localItems;
+    }
+
     if (foundItem) {
       foundItem.quantity += 1;
     } else {
       this.items.push(new CartItem(item));
     }
     this.snackService.notify(`Você adicionou o item ${item.name}`);
+    localStorage.setItem("cartItem", JSON.stringify(this.items));
+    console.log(JSON.parse(localStorage.getItem("cartItem")));
   }
 
   removeItem(item) {
     this.items.splice(this.items.indexOf(item), 1);
     this.snackService.notify(`Você removeu o item ${item.menuItem.name}`);
+    localStorage.setItem("cartItem", JSON.stringify(this.items));
+  }
+  clear() {
+    this.arraySoma.length = 0;
+    this.items.length = 0;
   }
 
   total() {
@@ -69,11 +82,6 @@ export class CarrinhoComprasService implements OnInit {
       this.valorFinal = this.arraySoma.reduce((prev, value) => prev + value);
     }
     return (this.valorFinal = this.valorFinal);
-  }
-
-  clear() {
-    this.arraySoma.length = 0;
-    this.items.length = 0;
   }
 
   /* métodos para página de pedido */
@@ -92,6 +100,8 @@ export class CarrinhoComprasService implements OnInit {
       this.arraySoma.push(this.itemSoma);
       this.valorFinal = this.arraySoma.reduce((prev, value) => prev + value);
     }
+    localStorage.setItem("cartItem", JSON.stringify(this.items));
+    this.total();
     return (this.valorFinal = this.valorFinal);
   }
 
@@ -112,6 +122,8 @@ export class CarrinhoComprasService implements OnInit {
       this.arraySoma.push(this.itemSoma);
       this.valorFinal = this.arraySoma.reduce((prev, value) => prev + value);
     }
+    localStorage.setItem("cartItem", JSON.stringify(this.items));
+    this.total()
     return (this.valorFinal = this.valorFinal);
   }
 
@@ -123,5 +135,7 @@ export class CarrinhoComprasService implements OnInit {
       .pipe(tap(order => (this.lastOrder = order)));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.items.length = 0;
+  }
 }

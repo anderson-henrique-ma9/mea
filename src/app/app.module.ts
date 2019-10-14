@@ -5,10 +5,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
-
-import { AppComponent } from "./app.component";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderComponent } from "./header/header.component";
 import {
   RouterModule,
   Routes,
@@ -16,6 +12,10 @@ import {
   PreloadAllModules
 } from "@angular/router";
 import { ROUTES } from "./app.routes";
+
+import { AppComponent } from "./app.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { HeaderComponent } from "./header/header.component";
 import { HomeComponent } from "./home/home.component";
 import { RestaurantesComponent } from "./restaurantes/restaurantes.component";
 import { RestauranteComponent } from "./restaurantes/restaurante/restaurante.component";

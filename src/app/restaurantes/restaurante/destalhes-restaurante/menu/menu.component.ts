@@ -62,6 +62,8 @@ import {
   ]
 })
 export class MenuComponent implements OnInit {
+  localItems: [] = [];
+
   emptyCartState = "ready";
   cartItemState;
   itemsState = "ready";
@@ -71,7 +73,7 @@ export class MenuComponent implements OnInit {
     public carrinhoCompraService: CarrinhoComprasService
   ) {}
 
-  items = this.carrinhoCompraService.items;
+  items;
   // quantidade = 0;
 
   valorFinal = this.carrinhoCompraService.valorFinal;
@@ -89,6 +91,18 @@ export class MenuComponent implements OnInit {
     this.itensRestaurante = this.restaurantesService.menuRestaurante(
       this.route.parent.snapshot.params["id"]
     );
+
+    let localItem = (this.localItems = JSON.parse(
+      localStorage.getItem("cartItem")
+    ));
+    if (localItem) {
+      console.log(localItem);;
+      this.carrinhoCompraService.items = localItem;
+    }
+
+    this.items = this.carrinhoCompraService.items;
+    // this.localItems = JSON.parse(localStorage.getItem("cartItem"));
+
     // console.log(this.valorTotal)
     // console.log(this.route.parent.snapshot.params["id"])
   }
@@ -107,6 +121,8 @@ export class MenuComponent implements OnInit {
     }
     this.total();
 
+    // console.log(window.localStorage)
+
     // console.log(this.cartItemState);
   }
 
@@ -114,12 +130,13 @@ export class MenuComponent implements OnInit {
     this.carrinhoCompraService.removeItem(item);
     this.cartItemState = "removed";
     this.cartItemState = "ready";
-    console.log(this.cartItemState);
+    // console.log(this.cartItemState);
   }
 
   clear() {
     this.carrinhoCompraService.clear();
     this.outroRestaurantes = false;
+    localStorage.clear();
   }
 
   total() {

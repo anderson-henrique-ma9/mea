@@ -11,9 +11,11 @@ export class OrderItemsComponent implements OnInit {
   constructor(private carrinhoComprasService: CarrinhoComprasService) {}
 
   items: CartItem[] = this.carrinhoComprasService.items;
-  item
+  item;
 
   ngOnInit() {
+    this.carrinhoComprasService.total()
+
     // console.log(this.item)
   }
 
@@ -22,6 +24,6 @@ export class OrderItemsComponent implements OnInit {
   }
 
   aumentarQuantidade(item) {
-    this.carrinhoComprasService.aumentarQuantidade(item)
+    this.carrinhoComprasService.aumentarQuantidade(item);
   }
 }

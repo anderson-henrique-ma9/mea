@@ -123,8 +123,15 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.lastOrder);
-    console.log(this.itensPedido.length);
+    let localItem = JSON.parse(localStorage.getItem("cartItem"));
+    if (localItem) {
+      // console.log(localItem);
+      this.carrinhoComprasService.items = localItem;
+    }
+
+    this.items = this.carrinhoComprasService.items;
+    // console.log(this.lastOrder);
+    // console.log(this.itensPedido.length);
     // console.log(this.items);
   }
 }

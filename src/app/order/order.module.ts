@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LeaveOrderGuard } from "./leave-order.guard";
 
 const ROUTES: Routes = [
-  { path: "", component: OrderComponent, canDeactivate: [LeaveOrderGuard] }
+  { path: "", component: OrderComponent }
 ];
 
 @NgModule({

@@ -5,6 +5,7 @@
         <th scope="col">Quantidade</th>
         <th scope="col">Item</th>
         <th scope="col">Descrição</th>
+        <th scope="col">Val. Unit.</th>
         <th scope="col" class="text-right">Subtotal</th>
       </tr>
     </thead>
@@ -15,14 +16,15 @@
             (click)="diminuirQuantidade(item)"
             class="fa fa-minus btn btn-small"
           ></button
-          >{{ item.quantity
-          }}<button
+          >{{ item.quantity }}
+          <button
             (click)="aumentarQuantidade(item)"
             class="fa fa-plus btn btn-small"
           ></button>
         </th>
         <td>{{ item.menuItem.name }}</td>
         <td>{{ item.menuItem.description }}</td>
+        <td>{{ item.menuItem.price | currency: "BRL" }}</td>
         <td class="text-right">
           {{ item.menuItem.price * item.quantity | currency: "BRL" }}
         </td>
