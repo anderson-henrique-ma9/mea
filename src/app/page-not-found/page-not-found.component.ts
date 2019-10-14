@@ -34,6 +34,6 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit() {
     this.paginaAtual = this.route.snapshot.url[0].path;
-    console.log(this.paginaAtual);
+    // console.log(this.paginaAtual);
   }
 }

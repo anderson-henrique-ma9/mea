@@ -99,7 +99,9 @@ export class OrderComponent implements OnInit {
   }
 
   isOrderCompleted(): boolean {
-    return this.lastOrder !== undefined;
+    if (this.infoPedido.valid) {
+      return true;
+    } else return false;
   }
 
   receberItensPedido(orderItem) {
@@ -113,15 +115,16 @@ export class OrderComponent implements OnInit {
       .enviarPedido(this.infoPedido.value)
       .subscribe(res => {
         if (res) {
-          console.log(res);
+          // console.log(res);
           this.router.navigate(["/order-summary"]);
           this.carrinhoComprasService.clear();
         }
       });
-    this.lastOrder = this.carrinhoComprasService.lastOrder;
   }
 
   ngOnInit() {
+    console.log(this.lastOrder);
+    console.log(this.itensPedido.length);
     // console.log(this.items);
   }
 }

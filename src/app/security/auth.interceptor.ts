@@ -5,18 +5,43 @@ import {
   HttpEvent
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { LoginService } from "./login/login.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private loginService: LoginService) {}
+  constructor(private injector: Injector) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("interceptando", request);
+    const loginService = this.injector.get(LoginService); // resolvendo dependências cíclicas
 
-    return next.handle(request);
+    /* 
+    let headers = new HttpHeaders();
+
+    if (this.loginService.isLoggedIn()) {
+      headers = headers.set(
+        "Authorization",
+        `Bearer ${this.loginService.user.accessToken}`
+      );
+    }
+     */
+
+    if (loginService.isLoggedIn()) {
+      // o clone existe porque o request não pode ser mudado
+      const authRequest = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${loginService.user.accessToken}`
+        }
+      });
+      // console.log(authRequest);
+      return next.handle(authRequest); // processa o authRequest, não o request padrão
+    } else {
+      // console.log(request)
+      return next.handle(request); // se não estiver autenticado, segue o fluxo padrão
+    }
+
+    // console.log("interceptando", request);
   }
 }

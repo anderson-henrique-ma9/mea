@@ -1,34 +1,12 @@
-<div class="row mr-5">
-  <div class=" col-9">
-    <div class="col-12 mb-2" *ngFor="let item of itensRestaurante | async">
-      <div [@itemsAppeard]="itemsState" class="card">
-        <div class="card-body ">
-          <img
-            [src]="item?.imagePath"
-            class="card-img-top w-25 h-25 float-left"
-            alt="..."
-          />
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">
-            {{ item.description }}
-          </p>
-          <small>{{ item.price | currency: "BRL" }}</small>
-          <br />
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-          <a (click)="addItem(item)" class="badge badge-success text-white"
-            ><i class="fa fa-plus-square"></i> Adicionar</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="card" style="width: 18rem;">
-      <div class="card-header "[@emptyCartItem] = "emptyCartState">
+<div class="row">
+  <div class="col-md-4 mb-2 mx-auto float-md-right">
+    <div class="card">
+      <div class="card-header " [@emptyCartItem]="emptyCartState">
         <i class="fa fa-shopping-cart"></i>
         Carrinho
       </div>
-      <div [@emptyCartItem] = "emptyCartState"
+      <div
+        [@emptyCartItem]="emptyCartState"
         *ngIf="this.carrinhoCompraService.items.length == 0"
         class="list-group-item"
       >
@@ -83,6 +61,29 @@
           </div>
         </div>
       </ul>
+    </div>
+  </div>
+  <div class="mx-auto col float-md-">
+    <div class="mb-2" *ngFor="let item of itensRestaurante | async">
+      <div [@itemsAppeard]="itemsState" class="card clearfix ">
+        <div class="card-body  clearfix">
+          <img
+            [src]="item?.imagePath"
+            class="card-img-top w-25 float-right mb-0"
+            alt="..."
+          />
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">
+            {{ item.description }}
+          </p>
+          <small>{{ item.price | currency: "BRL" }}</small>
+          <br />
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <a (click)="addItem(item)" class="badge badge-success text-white mt-4"
+            ><i class="fa fa-plus-square"></i> Adicionar</a
+          >
+        </div>
+      </div>
     </div>
   </div>
 </div>

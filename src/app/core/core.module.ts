@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RestaurantesService } from "../restaurantes/restaurantes.service";
 import { CarrinhoComprasService } from "../carrinho-compras.service";

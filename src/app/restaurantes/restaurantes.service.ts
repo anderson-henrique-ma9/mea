@@ -17,11 +17,11 @@ export class RestaurantesService {
   restaurantes(search?): Observable<Restaurante> {
     return this.http
       .get<Restaurante>(`${this.MEAT}/restaurants`, { params: { q: search } })
-      .pipe(
-        catchError(res => {
-          throw console.log("Não foi possível obter os dados do servidor");
-        })
-      );
+      // .pipe(
+      //   catchError(res => {
+      //     throw console.log("Não foi possível obter os dados do servidor");
+      //   })
+      // );
   }
   restaurantById(id: string): Observable<Restaurante> {
     return this.http.get<Restaurante>(`${this.MEAT}/restaurants/${id}`);

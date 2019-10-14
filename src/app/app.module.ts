@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
@@ -30,7 +30,8 @@ import { CoreModule } from "./core/core.module";
 import { SnackbarComponent } from "./shared/snackbar/snackbar.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { LoginComponent } from "./security/login/login.component";
-import { UserDetailComponent } from './header/user-detail/user-detail.component';
+import { UserDetailComponent } from "./header/user-detail/user-detail.component";
+import { GlobalErrorHandler } from "./app.errorhandler";
 
 @NgModule({
   declarations: [
@@ -65,6 +66,8 @@ import { UserDetailComponent } from './header/user-detail/user-detail.component'
   ],
   providers: [
     /* {provide: LocationStrategy, useClass: HashLocationStrategy} */
+
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent]
 })
