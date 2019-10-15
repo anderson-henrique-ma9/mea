@@ -38,10 +38,17 @@
     </h3>
   </div>
   <div class="dropdown-divider"></div>
-  <h4 class="ml-2 font-weight-light">
+  <h4 class="ml-2 mb-0 font-weight-light float-left">
     Endereço de entrega
   </h4>
+
   <form [formGroup]="infoPedido" class="mb-2 ml-2 mr-2">
+    {{ infoPedido.value | json}}
+    <button (click) = "consultaCep(infoPedido.controls['cep'].value)" class="btn backgroundGreenBanese float-right ml-2">Pesquisar</button>
+    <div class="float-right">
+      <input formControlName="cep" class="form-control float-right mb-2" placeholder="Digite seu CEP">
+    </div>
+    <div class="clearfix"></div>
     <div class="form-row">
       <div class="col-md-6 ">
         <input

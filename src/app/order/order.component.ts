@@ -5,6 +5,7 @@ import { FinalizeOrderComponent } from "./finalize-order/finalize-order.componen
 import { OrderItem } from "./order.model";
 import { Router } from "@angular/router";
 import { tap } from "rxjs/operators";
+import { OrderService } from './order-service.service';
 import {
   trigger,
   state,
@@ -34,6 +35,7 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private carrinhoComprasService: CarrinhoComprasService,
+    private orderService: OrderService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -67,7 +69,8 @@ export class OrderComponent implements OnInit {
       confirmaEmail: this.fb.control("", [
         Validators.required,
         Validators.pattern(this.emailPattern)
-      ])
+      ]),
+      cep: this.fb.control('', [Validators.required])
     },
     { validator: OrderComponent.equalsTo }
   );
@@ -120,6 +123,10 @@ export class OrderComponent implements OnInit {
           this.carrinhoComprasService.clear();
         }
       });
+  }
+
+  consultaCep(cep) {
+    this.orderService.consultaCep(cep)
   }
 
   ngOnInit() {

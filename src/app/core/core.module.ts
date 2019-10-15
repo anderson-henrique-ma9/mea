@@ -9,6 +9,7 @@ import { LeaveOrderGuard } from "../order/leave-order.guard";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "../security/auth.interceptor";
 import { CustomCurrencyPipe } from '../customPipes/custom-currency.pipe';
+import { OrderService } from '../order/order-service.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CustomCurrencyPipe } from '../customPipes/custom-currency.pipe';
     LoginService,
     LoggedInGuard,
     LeaveOrderGuard,
+    OrderService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: [
