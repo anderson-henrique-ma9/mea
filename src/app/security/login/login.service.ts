@@ -29,7 +29,7 @@ export class LoginService implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    return this.sessionDataStorage !== undefined;
+    return this.user !== undefined;
   }
 
   login(email: string, password: string): Observable<User> {
@@ -41,7 +41,7 @@ export class LoginService implements OnInit {
       .pipe(
         tap(user => {
           this.user = user;
-          sessionStorage.setItem("sessionData", JSON.stringify(this.user));
+          // sessionStorage.setItem("sessionData", JSON.stringify(this.user));
           /* this.sessionDataStorage = JSON.parse(
             sessionStorage.getItem("sessionData")
           ); */
