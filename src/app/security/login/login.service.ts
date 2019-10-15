@@ -21,15 +21,12 @@ export class LoginService implements OnInit {
   MEAT = MEAT;
 
   user: User;
-  sessionDataStorage;
+  storedSession;
 
-  ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem("sessionData"));
-    console.log(this.sessionDataStorage)
-  }
+  ngOnInit() {}
 
   isLoggedIn(): boolean {
-    return this.sessionDataStorage !== undefined;
+    return this.user !== undefined;
   }
 
   login(email: string, password: string): Observable<User> {
@@ -41,11 +38,7 @@ export class LoginService implements OnInit {
       .pipe(
         tap(user => {
           this.user = user;
-          sessionStorage.setItem("sessionData", JSON.stringify(this.user));
-          /* this.sessionDataStorage = JSON.parse(
-            sessionStorage.getItem("sessionData")
-          ); */
-          // console.log(this.sessionDataStorage);
+          localStorage.setItem('session', JSON.stringify(user))
         })
       );
   }
@@ -53,6 +46,7 @@ export class LoginService implements OnInit {
   logout() {
     this.user = undefined;
     this.router.navigate(["/"]);
+    localStorage.removeItem('session')
   }
 
   handleLogin(path = this.lastUrl) {

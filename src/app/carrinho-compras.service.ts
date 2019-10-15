@@ -59,13 +59,17 @@ export class CarrinhoComprasService implements OnInit {
     }
     this.snackService.notify(`Você adicionou o item ${item.name}`);
     localStorage.setItem("cartItem", JSON.stringify(this.items));
-    console.log(JSON.parse(localStorage.getItem("cartItem")));
+    // console.log(JSON.parse(localStorage.getItem("cartItem")));
+    this.total()
+    // console.log(this.valorFinal)
   }
 
   removeItem(item) {
     this.items.splice(this.items.indexOf(item), 1);
     this.snackService.notify(`Você removeu o item ${item.menuItem.name}`);
     localStorage.setItem("cartItem", JSON.stringify(this.items));
+    this.total()
+    // console.log(this.valorFinal)
   }
   clear() {
     this.arraySoma.length = 0;
@@ -136,6 +140,8 @@ export class CarrinhoComprasService implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(this.valorFinal)
+    this.total()
     this.items.length = 0;
   }
 }

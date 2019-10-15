@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { RestaurantesService } from "../../restaurantes.service";
 import { Restaurante } from "../../restaurante.model";
 import { ActivatedRoute } from "@angular/router";
+import { CarrinhoComprasService } from '../../../carrinho-compras.service';
 import {
   trigger,
   state,
@@ -33,7 +34,8 @@ export class DestalhesRestauranteComponent implements OnInit {
   restaurante: Restaurante;
   constructor(
     private restaurantesService: RestaurantesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private carrinhoComprasService: CarrinhoComprasService
   ) {}
 
   restaurantDetailsStatus = "ready";
@@ -41,5 +43,7 @@ export class DestalhesRestauranteComponent implements OnInit {
     this.restaurantesService
       .restaurantById(this.route.snapshot.params["id"])
       .subscribe(restaurante => (this.restaurante = restaurante));
+
+    this.carrinhoComprasService.total();
   }
 }

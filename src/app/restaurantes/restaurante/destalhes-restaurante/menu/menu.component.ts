@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, AfterContentInit } from "@angular/core";
 import { RestaurantesService } from "../../../restaurantes.service";
 import { ActivatedRoute } from "@angular/router";
 import { CarrinhoComprasService } from "../../../../carrinho-compras.service";
@@ -61,7 +61,7 @@ import {
     ])
   ]
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, AfterContentInit {
   localItems: [] = [];
 
   emptyCartState = "ready";
@@ -70,85 +70,23 @@ export class MenuComponent implements OnInit {
   constructor(
     private restaurantesService: RestaurantesService,
     private route: ActivatedRoute,
-    public carrinhoCompraService: CarrinhoComprasService
+    private carrinhoComprasService: CarrinhoComprasService
   ) {}
 
   items;
   // quantidade = 0;
 
-  valorFinal = this.carrinhoCompraService.valorFinal;
+  valorFinal = this.carrinhoComprasService.valorFinal;
   routeParam = this.route.parent.snapshot.params["id"];
-  outroRestaurantes = false;
+  outrosRestaurantes = false;
 
   itensRestaurante;
 
   ngOnInit() {
-    /* this.restaurantesService
-      .menuRestaurante(this.route.parent.snapshot.params["id"])
-      .subscribe(
-        itensRestaurante => (this.itensRestaurante = itensRestaurante)
-      ); */
-    this.itensRestaurante = this.restaurantesService.menuRestaurante(
-      this.route.parent.snapshot.params["id"]
-    );
-
-    let localItem = (this.localItems = JSON.parse(
-      localStorage.getItem("cartItem")
-    ));
-    if (localItem) {
-      console.log(localItem);;
-      this.carrinhoCompraService.items = localItem;
-    }
-
-    this.items = this.carrinhoCompraService.items;
-    // this.localItems = JSON.parse(localStorage.getItem("cartItem"));
-
-    // console.log(this.valorTotal)
-    // console.log(this.route.parent.snapshot.params["id"])
   }
-
-  addItem(item) {
-    if (this.items.length == 0) {
-      this.carrinhoCompraService.addItem(item);
-    } else if (
-      this.items[0].menuItem.restaurantId !=
-      this.route.parent.snapshot.params["id"]
-    ) {
-      this.outroRestaurantes = true;
-      // window.alert("Restaurantes Diferentes");
-    } else {
-      this.carrinhoCompraService.addItem(item);
-    }
-    this.total();
-
-    // console.log(window.localStorage)
-
-    // console.log(this.cartItemState);
-  }
-
-  removeItem(item) {
-    this.carrinhoCompraService.removeItem(item);
-    this.cartItemState = "removed";
-    this.cartItemState = "ready";
-    // console.log(this.cartItemState);
-  }
-
-  clear() {
-    this.carrinhoCompraService.clear();
-    this.outroRestaurantes = false;
-    localStorage.clear();
-  }
-
-  total() {
-    if (
-      this.items[0].menuItem.restaurantId !=
-      this.route.parent.snapshot.params["id"]
-    ) {
-      this.outroRestaurantes = true;
-    } else this.carrinhoCompraService.total();
-
-    this.valorFinal = this.carrinhoCompraService.valorFinal;
-
-    // console.log(this.valorSoma)
+  ngAfterContentInit(): void {
+    // this.carrinhoComprasService.total();
+    // this.valorFinal = this.carrinhoComprasService.valorFinal;
+    // console.log(this.valorFinal);
   }
 }

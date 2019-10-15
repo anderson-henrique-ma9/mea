@@ -1,89 +1,10 @@
 <div class="row" [@emptyCartItem]="emptyCartState">
-  <div class="col-md-4 mb-2 mx-auto float-md-right" >
-    <div class="card">
-      <div class="card-header " >
-        <i class="fa fa-shopping-cart"></i>
-        Carrinho
-      </div>
-      <div
-        [@emptyCartItem]="emptyCartState"
-        *ngIf="this.carrinhoCompraService.items.length == 0"
-        class="list-group-item"
-      >
-        Seu carrinho está vazio
-      </div>
-      <ul
-        *ngIf="this.carrinhoCompraService.items.length > 0"
-        class="list-group list-group-flush"
-      >
-        <li
-          [@cartItemAppeard]="cartItemState"
-          *ngFor="let item of this.items"
-          class="list-group-item text-wrap"
-        >
-          <small>
-            <h6 class="m-0 p-0">
-              {{ item.menuItem.name + ":" + " x" + item.quantity }}
-              <p class="m-0 p-0 float-right mt-1">
-                {{ item.menuItem.price * item.quantity | currency: "BRL" }}
-              </p>
-              <small class="float-center">
-                <a
-                  (click)="removeItem(item)"
-                  class="btn btn-outline-danger btn-sm"
-                  ><i class="fa fa-times"></i
-                ></a>
-              </small>
-            </h6>
-          </small>
-        </li>
-        <div class="text-center mt-2 font-weight-bold">
-          Total: {{ valorFinal | currency: "BRL" }}
-        </div>
-        <div *ngIf="outroRestaurantes">
-          <h6 class="text-red text-center mt-2 text-danger">
-            Você tem itens de outro restaurante! Por favor, limpe o carrinho!
-          </h6>
-        </div>
-        <div class="list-group-item mx-auto">
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button (click)="clear()" type="button" class="btn btn-danger">
-              Limpar
-            </button>
-            <button
-              [routerLink]="['/order']"
-              type="button"
-              (click)="total()"
-              class="btn btn-success"
-            >
-              Finalizar
-            </button>
-          </div>
-        </div>
-      </ul>
-    </div>
+  <div class="col-md-4 mb-2 mx-auto float-md-right">
+    <!-- carrinho de compras -->
+    <app-carrinho-compras></app-carrinho-compras>
   </div>
-  <div class="mx-auto col float-md-">
-    <div class="mb-2" *ngFor="let item of itensRestaurante | async">
-      <div [@itemsAppeard]="itemsState" class="card clearfix ">
-        <div class="card-body  clearfix">
-          <img
-            [src]="item?.imagePath"
-            class="card-img-top w-25 float-right mb-0"
-            alt="..."
-          />
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">
-            {{ item.description }}
-          </p>
-          <small>{{ item.price | currency: "BRL" }}</small>
-          <br />
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-          <a (click)="addItem(item)" class="badge badge-success text-white mt-4"
-            ><i class="fa fa-plus-square"></i> Adicionar</a
-          >
-        </div>
-      </div>
-    </div>
+  <div class="mx-auto col float-md-left">
+    <!-- itens de menu -->
+    <app-itens></app-itens>
   </div>
 </div>

@@ -24,9 +24,9 @@
         </th>
         <td>{{ item.menuItem.name }}</td>
         <td>{{ item.menuItem.description }}</td>
-        <td>{{ item.menuItem.price | currency: "BRL" }}</td>
+        <td>{{ item.menuItem.price | customCurrency  }}</td>
         <td class="text-right">
-          {{ item.menuItem.price * item.quantity | currency: "BRL" }}
+          {{ item.menuItem.price * item.quantity | customCurrency }}
         </td>
       </tr>
     </tbody>

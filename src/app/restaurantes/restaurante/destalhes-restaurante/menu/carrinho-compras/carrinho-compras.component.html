@@ -1,11 +1,61 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-header">
-      <i class="fa fa-shopping-cart"></i>
-      Carrinho
+<div class="card">
+  <div class="card-header ">
+    <i class="fa fa-shopping-cart"></i>
+    Carrinho
+  </div>
+  <div
+    [@emptyCartItem]="emptyCartState"
+    *ngIf="this.carrinhoComprasService.items.length == 0"
+    class="list-group-item"
+  >
+    Seu carrinho está vazio
+  </div>
+  <ul
+    *ngIf="this.carrinhoComprasService.items.length > 0"
+    class="list-group list-group-flush"
+  >
+    <li
+      [@cartItemAppeard]="cartItemState"
+      *ngFor="let item of this.items"
+      class="list-group-item text-wrap"
+    >
+      <small>
+        <h6 class="m-0 p-0">
+          {{ item.menuItem.name + ":" + " x" + item.quantity }}
+          <p class="m-0 p-0 float-right mt-1">
+            {{ item.menuItem.price * item.quantity | customCurrency }}
+          </p>
+          <small class="float-center">
+            <a (click)="removeItem(item)" class="btn btn-outline-danger btn-sm"
+              ><i class="fa fa-times"></i
+            ></a>
+          </small>
+        </h6>
+      </small>
+    </li>
+    <div *ngIf="valorFinal !== undefined" class="text-center mt-2 font-weight-bold">
+      Total: {{ this.carrinhoComprasService.valorFinal | customCurrency }}
     </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
+    <div *ngIf="this.outrosRestaurantes">
+      <h6 class="text-red text-center mt-2 text-danger">
+        Você tem itens de outro restaurante! Por favor, limpe o carrinho!
+      </h6>
+    </div>
+    <div class="list-group-item mx-auto">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button (click)="clear()" type="button" class="btn btn-danger">
+          Limpar
+        </button>
+        <button
+          [routerLink]="['/order']"
+          type="button"
+          (click)="total()"
+          class="btn btn-success"
+          [disabled] = "this.outrosRestaurantes"
+        >
+          Finalizar
+        </button>
+      </div>
+    </div>
   </ul>
 </div>

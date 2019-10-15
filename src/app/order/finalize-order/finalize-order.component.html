@@ -28,19 +28,19 @@
             <td>Itens</td>
             <td *ngIf="items.length == 0" class="text-right">R$ 0,00</td>
             <td *ngIf="items.length > 0" class="text-right">
-              {{ this.carrinhoComprasService.valorFinal | currency: "BRL" }}
+              {{ this.carrinhoComprasService.valorFinal | customCurrency }}
             </td>
           </tr>
           <tr>
             <td>Frete</td>
-            <td class="text-right">R$ 10,00</td>
+            <td class="text-right">{{10 | customCurrency }}</td>
           </tr>
           <tr>
             <td>Total</td>
-            <td *ngIf="items.length == 0" class="text-right">R$ 10,00</td>
+            <td *ngIf="items.length == 0" class="text-right">{{10 | customCurrency }}</td>
             <td *ngIf="items.length > 0" class="text-right">
               {{
-                this.carrinhoComprasService.valorFinal + 10 | currency: "BRL"
+                this.carrinhoComprasService.valorFinal + 10 | customCurrency
               }}
             </td>
           </tr>

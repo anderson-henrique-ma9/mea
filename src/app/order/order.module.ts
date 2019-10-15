@@ -6,6 +6,7 @@ import { FinalizeOrderComponent } from "./finalize-order/finalize-order.componen
 import { Routes, RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LeaveOrderGuard } from "./leave-order.guard";
+import { CoreModule } from '../core/core.module';
 
 const ROUTES: Routes = [
   { path: "", component: OrderComponent }
@@ -17,7 +18,8 @@ const ROUTES: Routes = [
     CommonModule,
     RouterModule.forChild(ROUTES),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ]
 })
 export class OrderModule {}

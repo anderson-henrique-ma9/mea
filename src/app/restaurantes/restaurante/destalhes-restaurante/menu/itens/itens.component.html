@@ -1,0 +1,21 @@
+<div class="mb-2" *ngFor="let item of itensRestaurante">
+  <div [@itemsAppeard]="itemsState" class="card clearfix ">
+    <div class="card-body  clearfix">
+      <img
+        [src]="item?.imagePath"
+        class="card-img-top w-25 float-right mb-0"
+        alt="..."
+      />
+      <h5 class="card-title">{{ item.name }}</h5>
+      <p class="card-text">
+        {{ item.description }}
+      </p>
+      <small>{{ item.price | customCurrency }}</small>
+      <br />
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      <a (click)="addItem(item)" class="badge badge-success text-white mt-4"
+        ><i class="fa fa-plus-square"></i> Adicionar</a
+      >
+    </div>
+  </div>
+</div>

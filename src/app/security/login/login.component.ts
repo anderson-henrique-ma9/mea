@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   navigateTo: string;
 
-  sessionDataStorage = this.loginService.sessionDataStorage;
+  // sessionDataStorage = this.loginService.sessionDataStorage;
 
   constructor(
     private fb: FormBuilder,
@@ -35,8 +35,9 @@ export class LoginComponent implements OnInit {
     } else {
       this.navigateTo = '/'
     }
+    
 
-    this.loginService.user = JSON.parse(sessionStorage.getItem("sessionData"));
+    // this.loginService.user = JSON.parse(sessionStorage.getItem("sessionData"));
 
     // console.log(this.activatedRoute.snapshot.params["to"])
      

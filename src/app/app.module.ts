@@ -32,6 +32,8 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { LoginComponent } from "./security/login/login.component";
 import { UserDetailComponent } from "./header/user-detail/user-detail.component";
 import { GlobalErrorHandler } from "./app.errorhandler";
+import { ItensComponent } from "./restaurantes/restaurante/destalhes-restaurante/menu/itens/itens.component";
+import { CustomCurrencyPipe } from './customPipes/custom-currency.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { GlobalErrorHandler } from "./app.errorhandler";
     SnackbarComponent,
     PageNotFoundComponent,
     LoginComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ItensComponent,
+    // CustomCurrencyPipe
   ],
   imports: [
     BrowserModule,
