@@ -49,6 +49,8 @@ export class OrderComponent implements OnInit {
   orderId: string;
   lastOrder;
 
+  enderecoCep;
+
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   infoPedido = this.fb.group(
@@ -126,7 +128,9 @@ export class OrderComponent implements OnInit {
   }
 
   consultaCep(cep) {
-    this.orderService.consultaCep(cep)
+    let enderecoCep = this.orderService.consultaCep(cep);
+    console.log(enderecoCep)
+    
   }
 
   ngOnInit() {
@@ -137,6 +141,8 @@ export class OrderComponent implements OnInit {
     }
 
     this.items = this.carrinhoComprasService.items;
+
+    
     // console.log(this.lastOrder);
     // console.log(this.itensPedido.length);
     // console.log(this.items);
