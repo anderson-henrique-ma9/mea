@@ -1,5 +1,5 @@
 <div class="container clearfix">
-  <form [formGroup]="searchForm" class="row ">
+  <form [formGroup]="searchForm" class="row">
     <h4 class="text-center ">
       Todos os Restaurantes
     </h4>
@@ -10,14 +10,26 @@
       placeholder="Pesquisar"
       aria-label="Pesquisar"
     />
-    <a
-      class="btn backgroundGreenBanese text-white text-center col-md-1 float-md-right mx-0"
-    >
-      <i class="fa fa-search"></i>
-    </a>
   </form>
-  <div *ngIf="restaurantes?.length === 0" >
+
+  <div *ngIf="restaurantes?.length === 0">
     Não encontramos resultado para sua busca
+  </div>
+</div>
+
+<div
+  *ngIf="this.typeAheadItems && this.settedSearch === false"
+  style="position: relative; z-index: 1000; margin: 0; padding: 0;"
+  class="col-md-4 ml-md-auto"
+>
+  <div class="list-group">
+    <button
+      (click)="setSearch(item.name)"
+      class="list-group-item"
+      *ngFor="let item of typeAheadItems"
+    >
+      {{ item.name }}
+    </button>
   </div>
 </div>
 <app-restaurante [restaurantes]="restaurantes"></app-restaurante>

@@ -29,8 +29,6 @@
 </div>
 
 <div *ngIf="items.length > 0" [@orderComponentState]="orderComponentState">
-  <!-- {{ infoPedido.status }} <br />
-  {{ infoPedido.hasError("emailsNotMatch") }} -->
   <div class="row ml-2 mt-2">
     <h3 class="ml-2 font-weight-light">
       <i class="fa fa-shopping-cart"></i>
@@ -38,90 +36,102 @@
     </h3>
   </div>
   <div class="dropdown-divider"></div>
-  <h4 class="ml-2 mb-0 font-weight-light float-left">
+  <h4 class="ml-3 mb-0 font-weight-light float-md-left">
     Endereço de entrega
   </h4>
+  <form [formGroup]="infoPedido">
+    <div class="input-group mb-3 col col-md-4 float-md-right">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        formControlName="cep"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn backgroundGreenBanese"
+          (click)="consultaCep(infoPedido.controls['cep'].value)"
+        >
+          Consultar
+        </button>
+      </div>
+    </div>
+  </form>
 
   <form [formGroup]="infoPedido" class="mb-2 ml-2 mr-2">
-    {{ infoPedido.value | json}}
-    <button (click) = "consultaCep(infoPedido.controls['cep'].value)" class="btn backgroundGreenBanese float-right ml-2">Pesquisar</button>
-    <div class="float-right">
-      <input formControlName="cep" class="form-control float-right mb-2" placeholder="Digite seu CEP">
-    </div>
+    <!-- <button
+      (click)="consultaCep(infoPedido.controls['cep'].value)"
+      class="btn backgroundGreenBanese float-md-right "
+    >
+      Pesquisar
+    </button>
+    <div class="float-md-right">
+      <input
+        formControlName="cep"
+        class="form-control mb-2"
+        placeholder="Digite seu CEP"
+      />
+    </div> -->
+
     <div class="clearfix"></div>
     <div class="form-row">
-      <div class="col-md-6 ">
-        <input
-          id="rua"
-          name="rua"
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-invalid':
-              infoPedido.controls['rua'].invalid &&
-              (infoPedido.controls['rua'].dirty ||
-                infoPedido.controls['rua'].touched),
-            'is-valid':
-              infoPedido.controls['rua'].valid &&
-              (infoPedido.controls['rua'].dirty ||
-                infoPedido.controls['rua'].touched)
-          }"
-          placeholder="Rua / Avenida / Travessa"
-          formControlName="rua"
-        />
-        <small
-          *ngIf="
-            infoPedido.controls['rua'].invalid &&
-            (infoPedido.controls['rua'].dirty ||
-              infoPedido.controls['rua'].touched)
-          "
-          class="text-danger container"
-        >
-          Endereço obrigatório
-        </small>
+      <div class="mt-2 col-md-6 ">
+        <!-- injeção de conteúdo -->
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="rua"
+            placeholder="Endereço*"
+          />
+        </app-input>
       </div>
 
-      <div class="col-md-2">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-invalid':
-              infoPedido.controls['numero'].invalid &&
-              (infoPedido.controls['numero'].dirty ||
-                infoPedido.controls['numero'].touched),
-            'is-valid':
-              infoPedido.controls['numero'].valid &&
-              (infoPedido.controls['numero'].dirty ||
-                infoPedido.controls['numero'].touched)
-          }"
-          placeholder="Número"
-          formControlName="numero"
-        />
-        <small
-          *ngIf="
-            infoPedido.controls['numero'].invalid &&
-            (infoPedido.controls['numero'].dirty ||
-              infoPedido.controls['numero'].touched)
-          "
-          class="text-danger container"
-        >
-          Número obrigatório
-        </small>
+      <div class="mt-2 col-md-2">
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="numero"
+            placeholder="Número*"
+          />
+        </app-input>
       </div>
-      <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-valid':
-              infoPedido.controls['complemento'].valid &&
-              (infoPedido.controls['complemento'].dirty ||
-                infoPedido.controls['complemento'].touched)
-          }"
-          placeholder="Complemento"
-          formControlName="complemento"
-        />
+      <div class="mt-2 col-md-4">
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="complemento"
+            placeholder="Complemento"
+          />
+        </app-input>
+      </div>
+    </div>
+    <div class="form-row mt-2">
+      <div class="col-4 col-md-5">
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="cidade"
+            placeholder="Cidade*"
+          />
+        </app-input>
+      </div>
+      <div class="col-4 col-md-5 ">
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="bairro"
+            placeholder="Bairro*"
+          />
+        </app-input>
+      </div>
+      <div class="col-4 col-md-2">
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="estado"
+            placeholder="Estado*"
+          />
+        </app-input>
       </div>
     </div>
     <div class="dropdown-divider"></div>
@@ -130,74 +140,37 @@
     </h4>
     <form [formGroup]="infoPedido" class="form-row">
       <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-invalid':
-              infoPedido.controls['nome'].invalid &&
-              (infoPedido.controls['nome'].dirty ||
-                infoPedido.controls['nome'].touched),
-            'is-valid':
-              infoPedido.controls['nome'].valid &&
-              (infoPedido.controls['nome'].dirty ||
-                infoPedido.controls['nome'].touched)
-          }"
-          placeholder="Digite seu nome"
-          formControlName="nome"
-        />
-        <small
-          *ngIf="
-            infoPedido.controls['nome'].invalid &&
-            (infoPedido.controls['nome'].dirty ||
-              infoPedido.controls['nome'].touched)
-          "
-          class="text-danger container"
-        >
-          Nome obrigatório
-        </small>
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="nome"
+            placeholder="Digite seu nome"
+          />
+        </app-input>
       </div>
       <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-invalid':
-              infoPedido.controls['email'].invalid &&
-              (infoPedido.controls['email'].dirty ||
-                infoPedido.controls['email'].touched),
-            'is-valid':
-              infoPedido.controls['email'].valid &&
-              (infoPedido.controls['email'].dirty ||
-                infoPedido.controls['email'].touched)
-          }"
-          placeholder="Digite seu e-mail"
-          formControlName="email"
-        />
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="email"
+            placeholder="Digie seu e-mail"
+          />
+        </app-input>
       </div>
 
       <div class="col-md-4 ">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-invalid':
-              infoPedido.controls['confirmaEmail'].invalid &&
-              (infoPedido.controls['confirmaEmail'].dirty ||
-                infoPedido.controls['confirmaEmail'].touched),
-            'is-valid':
-              infoPedido.controls['confirmaEmail'].valid &&
-              (infoPedido.controls['confirmaEmail'].dirty ||
-                infoPedido.controls['confirmaEmail'].touched)
-          }"
-          placeholder="Confirma seu e-mail"
-          formControlName="confirmaEmail"
-        />
+        <app-input>
+          <input
+            class="form-control"
+            formControlName="confirmaEmail"
+            placeholder="Confirme seu e-mail"
+          />
+        </app-input>
         <small
           *ngIf="infoPedido.hasError('emailsNotMatch')"
           class="text-danger container"
         >
-          Os e-mails precisam ser iguais
+          Os e-mails precisam ser iguais!
         </small>
       </div>
     </form>

@@ -1,6 +1,7 @@
 <div>
   <span *ngIf="this.loginService.isLoggedIn(); else notLoggedIn">
-    Olá, {{ this.loginService.user.name }} | <a (click)="logout()">Sair</a>
+    <a class="text-white" [routerLink]="['/user-details']" routerLinkActive="active" > Olá, {{ this.loginService.user.name }} </a>
+    | <a (click)="logout()">Sair</a>
   </span>
   <ng-template #notLoggedIn>
     <a (click)="login()">Entrar</a>

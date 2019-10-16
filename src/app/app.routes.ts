@@ -8,6 +8,7 @@ import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { LoginComponent } from "./security/login/login.component";
 import { LoggedInGuard } from "./security/loggedin.guard";
+import { UserFormComponent } from "./header/user-detail/user-form/user-form.component";
 
 export const ROUTES = [
   { path: "", component: HomeComponent },
@@ -36,5 +37,9 @@ export const ROUTES = [
     canActivate: [LoggedInGuard]
   },
   { path: "order-summary", component: OrderSummaryComponent },
+  {
+    path: "user-details",
+    component: UserFormComponent
+  },
   { path: "**", component: PageNotFoundComponent }
 ];

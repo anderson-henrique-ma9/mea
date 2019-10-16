@@ -4,8 +4,9 @@ import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { FinalizeOrderComponent } from "./finalize-order/finalize-order.component";
 import { OrderItem } from "./order.model";
 import { Router } from "@angular/router";
-import { tap } from "rxjs/operators";
-import { OrderService } from './order-service.service';
+import { tap, catchError } from "rxjs/operators";
+import { OrderService } from "./order-service.service";
+import { SnackService } from "../shared/snackbar/snack.service";
 import {
   trigger,
   state,
@@ -37,7 +38,8 @@ export class OrderComponent implements OnInit {
     private carrinhoComprasService: CarrinhoComprasService,
     private orderService: OrderService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private sn: SnackService
   ) {}
 
   items = this.carrinhoComprasService.items;
@@ -61,6 +63,12 @@ export class OrderComponent implements OnInit {
         Validators.pattern("^[0-9]*$")
       ]),
       complemento: this.fb.control(""),
+      bairro: this.fb.control("", [Validators.required]),
+      cidade: this.fb.control("", Validators.required),
+      estado: this.fb.control("", [
+        Validators.required,
+        Validators.maxLength(2)
+      ]),
       formaPagamento: this.fb.control("", [Validators.required]),
       pedido: this.fb.control(""),
       nome: this.fb.control("", [Validators.required, Validators.minLength(5)]),
@@ -72,7 +80,7 @@ export class OrderComponent implements OnInit {
         Validators.required,
         Validators.pattern(this.emailPattern)
       ]),
-      cep: this.fb.control('', [Validators.required])
+      cep: this.fb.control("", [Validators.required])
     },
     { validator: OrderComponent.equalsTo }
   );
@@ -128,9 +136,19 @@ export class OrderComponent implements OnInit {
   }
 
   consultaCep(cep) {
-    let enderecoCep = this.orderService.consultaCep(cep);
-    console.log(enderecoCep)
-    
+    this.orderService
+      .consultaCep(cep)
+      .subscribe(dados => {
+        this.enderecoCep = dados;
+        this.infoPedido.controls["rua"].setValue(this.enderecoCep.logradouro);
+        this.infoPedido.controls["bairro"].setValue(this.enderecoCep.bairro);
+        this.infoPedido.controls["cidade"].setValue(
+          this.enderecoCep.localidade
+        );
+        this.infoPedido.controls["estado"].setValue(this.enderecoCep.uf);
+        // console.log(this.enderecoCep);
+        // response => console.log(response)
+      });
   }
 
   ngOnInit() {
@@ -142,7 +160,6 @@ export class OrderComponent implements OnInit {
 
     this.items = this.carrinhoComprasService.items;
 
-    
     // console.log(this.lastOrder);
     // console.log(this.itensPedido.length);
     // console.log(this.items);

@@ -12,7 +12,6 @@ export class OrderService {
   constructor(private httpClient: HttpClient) {}
 
   consultaCep(cep) {
-    // console.log(cep);
-    this.httpClient.get(`/cepApi/${cep}/json`).subscribe((res) => this.endereco = res);
+    return this.httpClient.get(`/cepApi/${cep}/json`);
   }
 }

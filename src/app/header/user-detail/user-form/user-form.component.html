@@ -1,0 +1,99 @@
+{{ profileForm.value | json }}
+<h4 class="">
+  Dados do Usuário
+</h4>
+<div class="dropdown-divider"></div>
+<form [formGroup]="profileForm">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <app-input label="Nome">
+        <input
+          class="form-control"
+          formControlName="nome"
+          placeholder="Nome*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-6">
+      <app-input label="Sobrenome">
+        <input
+          class="form-control"
+          formControlName="sobrenome"
+          placeholder="Sobrenome*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-6">
+      <app-input label="Email">
+        <input
+          class="form-control"
+          formControlName="email"
+          placeholder="Digite seu e-mail*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-6">
+      <app-input label="Confirmação do e-mail">
+        <input
+          class="form-control"
+          formControlName="confirmaEmail"
+          placeholder="Confirme seu e-mail*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-5">
+      <app-input label="Rua">
+        <input
+          class="form-control"
+          formControlName="rua"
+          placeholder="Digite sua rua*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-2">
+      <app-input label="Número">
+        <input
+          class="form-control"
+          formControlName="numero"
+          placeholder="Número*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-5">
+      <app-input label="Complemento">
+        <input
+          class="form-control"
+          formControlName="complemento"
+          placeholder="Complemento"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-5">
+      <app-input label="Cidade">
+        <input
+          class="form-control"
+          formControlName="cidade"
+          placeholder="Cidade*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-6">
+      <app-input label="Bairro">
+        <input
+          class="form-control"
+          formControlName="bairro"
+          placeholder="Bairro*"
+        />
+      </app-input>
+    </div>
+    <div class="form-group col-md-1">
+      <app-input label="Estado">
+        <input
+          class="form-control"
+          formControlName="estado"
+          placeholder="Estado*"
+        />
+      </app-input>
+    </div>
+  </div>
+</form>

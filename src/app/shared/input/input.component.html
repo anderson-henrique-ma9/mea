@@ -1,0 +1,45 @@
+<div>
+  <div class="container">
+    <label *ngIf="this.label">
+      {{ label }}
+    </label>
+  </div>
+  <ng-content></ng-content>
+  <small>
+    <div *ngIf="status()" class="text-danger container">
+      {{ "Campo obrigatório!" }}
+    </div>
+    <div
+      *ngIf="this.input.hasError('emailsNotMatch')"
+      class="text-danger container"
+    >
+      {{ " | Os e-mails precisam ser iguais!" }}
+    </div>
+  </small>
+</div>
+
+<!-- <input
+  id="rua"
+  name="rua"
+  type="text"
+  class="form-control"
+  [ngClass]="{
+    'is-invalid':
+      infoPedido.controls['rua'].invalid &&
+      (infoPedido.controls['rua'].dirty || infoPedido.controls['rua'].touched),
+    'is-valid':
+      infoPedido.controls['rua'].valid &&
+      (infoPedido.controls['rua'].dirty || infoPedido.controls['rua'].touched)
+  }"
+  placeholder="Rua / Avenida / Travessa"
+  formControlName="rua"
+/>
+<small
+  *ngIf="
+    infoPedido.controls['rua'].invalid &&
+    (infoPedido.controls['rua'].dirty || infoPedido.controls['rua'].touched)
+  "
+  class="text-danger container"
+>
+  Endereço obrigatório
+</small> -->

@@ -26,6 +26,9 @@ export class GlobalErrorHandler extends ErrorHandler {
           case 404:
             this.ns.notify(message || 'Recurso não encontrado, por favor verifique a rede ou o caminho!');
             break;
+          case 400:
+            this.ns.notify(message || "Por favor, digite um cep válido!")
+            break;
         }
       });
     }

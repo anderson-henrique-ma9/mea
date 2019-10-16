@@ -33,7 +33,7 @@ import { LoginComponent } from "./security/login/login.component";
 import { UserDetailComponent } from "./header/user-detail/user-detail.component";
 import { GlobalErrorHandler } from "./app.errorhandler";
 import { ItensComponent } from "./restaurantes/restaurante/destalhes-restaurante/menu/itens/itens.component";
-import { CustomCurrencyPipe } from './customPipes/custom-currency.pipe';
+import { UserFormComponent } from './header/user-detail/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { CustomCurrencyPipe } from './customPipes/custom-currency.pipe';
     LoginComponent,
     UserDetailComponent,
     ItensComponent,
-    // CustomCurrencyPipe
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

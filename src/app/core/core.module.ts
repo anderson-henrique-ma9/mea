@@ -10,11 +10,17 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "../security/auth.interceptor";
 import { CustomCurrencyPipe } from '../customPipes/custom-currency.pipe';
 import { OrderService } from '../order/order-service.service';
+import { InputComponent } from '../shared/input/input.component';
 
 @NgModule({
   declarations: [
-    CustomCurrencyPipe
+    CustomCurrencyPipe,
+    InputComponent
   ],
+  imports: [
+    CommonModule
+  ]
+  ,
   providers: [
     RestaurantesService,
     CarrinhoComprasService,
@@ -26,7 +32,9 @@ import { OrderService } from '../order/order-service.service';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: [
-    CustomCurrencyPipe
+    CustomCurrencyPipe,
+    InputComponent,
+    CommonModule
   ]
 })
 export class CoreModule {}
